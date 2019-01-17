@@ -7,11 +7,13 @@ $whos = array(
   "tlc"=>$_POST["tlc"],
   "edit"=>$_POST["edit"],
   "enc"=>$_POST["enc"]);
-$img = $_FILES['img'];
-$filename = $img['tmp_name'];
-$handle = fopen($filename, "r");
-$ds = fread($handle, filesize($filename));
-$pvars   = array('image' => base64_encode($ds));
+if(!empty(@$_FILES['img']["tmp_name"])){
+  $img = $_FILES['img'];
+  $filename = $img['tmp_name'];
+  $handle = fopen($filename, "r");
+  $ds = fread($handle, filesize($filename));
+  $pvars   = array('image' => base64_encode($ds));
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,6 +21,11 @@ $pvars   = array('image' => base64_encode($ds));
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+pre {
+  overflow: hidden;
+}
+  </style>
   </head>
   <body>
     <div class="navbar-fixed">
@@ -38,7 +45,7 @@ $pvars   = array('image' => base64_encode($ds));
         </pre>
       </div>
       <div class="center">
-        <button class="btn waves-effect waves-light btn-large" onclick="M.toast({html: 'Postarea pentru Wien-Subs a fost copiată cu success în Clipboard!'})" data-clipboard-target="#wscopy">
+        <button class="btn waves-effect waves-light btn-large" onclick="M.toast({html: 'Postarea pentru Wien-Subs a fost copiată cu success în Clipboard!<br/>Verificați previzualizare înainte de a posta!!!'})" data-clipboard-target="#wscopy">
             Copy Wien-Subs to Clipboard
         </button>
       </div>
@@ -48,7 +55,7 @@ $pvars   = array('image' => base64_encode($ds));
         </pre>
       </div>
       <div class="center">
-        <button class="btn waves-effect waves-light btn-large" onclick="M.toast({html: 'Postarea pentru Shinobi a fost copiată cu success în Clipboard!<br/>Nu uitați să puneți poza!'})" data-clipboard-target="#shcopy">
+        <button class="btn waves-effect waves-light btn-large" onclick="M.toast({html: 'Postarea pentru Shinobi a fost copiată cu success în Clipboard!<br/>Verificați previzualizare înainte de a posta!!!'})" data-clipboard-target="#shcopy">
             Copy Shinobi to Clipboard
         </button>
       </div>

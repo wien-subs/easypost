@@ -63,6 +63,28 @@ header('X-XSS-Protection:0');
               </div>
             </div>
           </div>
+          <div class="row">
+            <div class="switch">
+              <label>
+                Off
+                <input type="checkbox" checked>
+                <span class="lever"></span>
+                On
+              </label>
+              <label class="grey-text text-darken-4"> Serie realizată în parteneriat? </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="switch">
+              <label>
+                Off
+                <input type="checkbox">
+                <span class="lever"></span>
+                On
+              </label>
+              <label class="grey-text text-darken-4"> Variantă "BETA"/"Low Quality"? </label>
+            </div>
+          </div>
           <div class="center">
             <button class="btn waves-effect waves-light" type="submit" name="action" value="ok">Submit
               <i class="material-icons right">send</i>
