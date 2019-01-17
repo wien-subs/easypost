@@ -92,6 +92,15 @@ class common {
           "source_id" => $pattern[0]);
         return $retrun;
         break;
+      case (strpos($url, "mega.nz") == true):
+        preg_match('~\S#([[:ascii:]]){10,53}~',$url, $pattern);
+        $retrun = array(
+          "dl" => "//mega.nz/".$pattern[0],
+          "iframe" => "//mega.nz/embed".$pattern[0],
+          "iframe_shinobi" => true,
+          "source_id" => $pattern[0]);
+        return $retrun;
+        break;
       default:
         return "";
         break;

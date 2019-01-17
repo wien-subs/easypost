@@ -70,6 +70,9 @@ class wiensubs {
       case (strpos($url, "yourupload.com") == true):
           return "YourUP";
         break;
+      case (strpos($url, "mega.nz") == true):
+          return "mega";
+        break;
       case (strpos($url, "fembed.com") == true):
           return "FemBed";
         break;

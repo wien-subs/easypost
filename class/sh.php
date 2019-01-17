@@ -55,6 +55,9 @@ class shinobi {
       case (strpos($url, "sendvid.com") == true):
           return '[SPOILER="Sursa '.$i.'"][MEDIA=sendvid]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
         break;
+      case (strpos($url, "mega.nz") == true):
+          return '[SPOILER="Sursa '.$i.'"][MEDIA=mega]'.str_replace("#", "",$iframe_id).'[/MEDIA][/SPOILER]'.PHP_EOL;
+        break;
       default:
         return "";
         break;
@@ -98,7 +101,7 @@ class shinobi {
       case (strpos($url, "mirrorace.com") == true):
           return ":mirror:";
         break;
-      case (strpos($url, "mega.co") == true):
+      case (strpos($url, "mega.nz") == true):
           return ":meganz:";
         break;
       case (strpos($url, "goole") == true):
