@@ -1,9 +1,11 @@
 <?php
 class shinobi {
-  public function sh($data, $who) {
+  public function sh($data, $who, $img) {
+    $images = new img();
+    $images = $images->image($img);
     $header = "
   [CENTER]
-  [IMG][/IMG]
+  [IMG]".$images."[/IMG]
   [B] - Episodul 
   Tradus în limba română - Download & Online[/B]
   ";

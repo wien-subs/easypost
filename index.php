@@ -21,7 +21,7 @@ header('X-XSS-Protection:0');
     </div>
     <div class="container">
       <div class="col">
-        <form action="result.php" method="post">
+        <form action="result.php" enctype="multipart/form-data" method="post">
           <div class="row">
             <div class="input-field col s12">
               <input id="mal" type="text" class="validate" name="tl">
@@ -48,8 +48,19 @@ header('X-XSS-Protection:0');
           </div>
           <div class="row">
             <div class="input-field col s12">
-              <textarea id="textare" class="materialize-textarea" data-length="9000" name="source" rows="18"></textarea>
+              <textarea id="textare" class="materialize-textarea" name="source" rows="18"></textarea>
               <label for="textare">1 link / perline</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="file-field input-field">
+              <div class="btn">
+                <span>File</span>
+                <input type="file" name="img">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" name="img" type="text">
+              </div>
             </div>
           </div>
           <div class="center">

@@ -7,6 +7,11 @@ $whos = array(
   "tlc"=>$_POST["tlc"],
   "edit"=>$_POST["edit"],
   "enc"=>$_POST["enc"]);
+$img = $_FILES['img'];
+$filename = $img['tmp_name'];
+$handle = fopen($filename, "r");
+$ds = fread($handle, filesize($filename));
+$pvars   = array('image' => base64_encode($ds));
 ?>
 <!DOCTYPE html>
 <html>
@@ -39,7 +44,7 @@ $whos = array(
       </div>
       <div class="col s12">
         <pre id="shcopy">
-          <?php echo htmlentities($sh->sh($data,$whos));?>
+          <?php echo htmlentities($sh->sh($data, $whos, $pvars));?>
         </pre>
       </div>
       <div class="center">
