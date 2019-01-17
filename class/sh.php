@@ -8,7 +8,7 @@ class shinobi {
   [IMG]".$images."[/IMG]
   [B] - Episodul 
   Tradus în limba română - Download & Online[/B]
-  ";
+  ".PHP_EOL;
 
     $middle="
   [I]Traducere: ".$who["tl"]."
@@ -70,9 +70,9 @@ class shinobi {
       $keep = $link[0];
       $durl = $common->get_url_id($keep);
       if($durl["dl"] !== null)
-        $sh_ddl .= " [URL='".$durl["dl"]."']".$this->sh_get_ddl_icon($durl["dl"])."[/URL] -";
+        $sh_ddl .= " [URL='https:".$durl["dl"]."']".$this->sh_get_ddl_icon($durl["dl"])."[/URL] -";
     }
-    return $sh_ddl;
+    return $sh_ddl.PHP_EOL;
   }
 
   private function sh_get_ddl_icon($url) {
