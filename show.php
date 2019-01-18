@@ -2,30 +2,15 @@
 header('X-XSS-Protection:0');
 error_reporting(E_ALL ^ E_NOTICE);
 include('function.php');
-$data = $_POST["source"];
-$ep = $_POST["eps_name"];
-
-if(!empty(@$_POST["inpart"]))
-  $part = true;
-else
-  $part = false;
-if(!empty(@$_POST["beta"]))
-  $beta = true;
-else
-  $beta = false;
-$whos = array(
-  "tl"=>(!empty($_POST["tl"]) ? $_POST["tl"] : "Unknown"),
-  "tlc"=>(!empty($_POST["tlc"]) ? $_POST["tlc"] : "Unknown"),
-  "edit"=>(!empty($_POST["edit"]) ? $_POST["edit"] : "Unknown"),
-  "enc"=>(!empty($_POST["enc"]) ? $_POST["enc"] : "Unknown"));
-if(!empty(@$_FILES['img']["tmp_name"])){
-  $img = $_FILES['img'];
-  $filename = $img['tmp_name'];
-  $handle = fopen($filename, "r");
-  $ds = fread($handle, filesize($filename));
-  $pvars   = array('image' => base64_encode($ds));
+$id = $_REQUEST["id"];
+if(!empty($id) && is_numeric($id)){
+  if($common->get_log_by_id($id) == false)
+    header("Location: logs.php");
+  else
+    $data = $common->get_log_by_id($id);
 }
-$db->register_eps($ep, $ws->ws($data, $whos, $beta, $part), $sh->sh($data, $whos, $pvars, $beta, $part, $ep));
+else
+  header("Location: logs.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,17 +30,21 @@ pre {
         <div class="nav-wrapper">
           <a href="index.php" class="brand-logo center">EasyPost</a>
           <ul id="nav-mobile" class="left hide-on-med-and-down">
-            <li class="active"><a href="index.php">Acasa</a></li>
-            <li><a href="logs.php">Logs</a></li>
-          </ul>
+            <li><a href="index.php">Acasa</a></li>
+            <li class="active"><a href="logs.php">Logs (<?php echo $id;?>)</a></li>
           </ul>
         </div>
       </nav>
     </div>
     <div class="container">
+    <div class="row">
+      <div class="col s12 center-align">
+        <h1><?php echo $data["title"];?></h1><br/><h3>(<?php echo $data["time"];?>)</h3>
+      </div>
+    </div>
       <div class="col s12">
         <pre id="wscopy">
-          <?php echo htmlentities($ws->ws($data, $whos, $beta, $part));?>
+          <?php echo $data["ws"];?>
         </pre>
       </div>
       <div class="center">
@@ -65,7 +54,7 @@ pre {
       </div>
       <div class="col s12">
         <pre id="shcopy">
-          <?php echo htmlentities($sh->sh($data, $whos, $pvars, $beta, $part, $ep));?>
+          <?php echo $data["sh"];?>
         </pre>
       </div>
       <div class="center">
@@ -77,7 +66,7 @@ pre {
     <script type="text/javascript" src="js/clipboard.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
     <script>
-      M.toast({html: 'Cod-ul pentru postări a fost generat!'});
+      M.toast({html: 'Cod-ul pentru postări a copiat din baza de date și afișiat'});
       new ClipboardJS('.btn');
     </script>
   </body>
