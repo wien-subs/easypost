@@ -111,6 +111,60 @@ class common {
           "source_id" => $pattern[0]);
         return $retrun;
         break;
+      case (strpos(strtolower($url), "sendit.cloud") == true):
+        preg_match('~[[:alnum:]]{12,14}~',$url, $pattern);
+        $retrun = array(
+          "dl" => "//sendit.cloud/".$pattern[0],
+          "iframe" => "//sendit.cloud/embed-".$pattern[0].".html",
+          "iframe_shinobi" => true,
+          "source_id" => $pattern[0]);
+        return $retrun;
+        break;
+      case (strpos($url, "tusfiles.com") == true):
+        preg_match('~[[:alnum:]]{12,14}~',$url, $pattern);
+        $retrun = array(
+          "dl" => "//tusfiles.com/".$pattern[0],
+          "iframe" => "//tusfiles.com/embed-".$pattern[0].".html",
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[0]);
+        return $retrun;
+        break;
+      case (strpos($url, "go4up.com") == true):
+        preg_match('~[[:alnum:]]{12,14}~',$url, $pattern);
+        $retrun = array(
+          "dl" => "//go4up.com/dl/".$pattern[0],
+          "iframe" => null,
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[0]);
+        return $retrun;
+        break;
+      case (strpos($url, "ok.ru") == true):
+        preg_match('~[[:digit:]]{11,15}~',$url, $pattern);
+        $retrun = array(
+          "dl" => null,
+          "iframe" => "//ok.ru/videoembed/".$pattern[0],
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[0]);
+        return $retrun;
+        break;
+      case (strpos($url, "filelist.ro") == true):
+        preg_match('~[[:digit:]]{6,7}~',$url, $pattern);
+        $retrun = array(
+          "dl" => "//filelist.ro/details.php?id=".$pattern[0],
+          "iframe" => null,
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[0]);
+        return $retrun;
+        break;
+      case (strpos($url, "nyaa.si") == true):
+        preg_match('~[[:digit:]]{6,7}~',$url, $pattern);
+        $retrun = array(
+          "dl" => "//nyaa.si/veiw/".$pattern[0],
+          "iframe" => null,
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[0]);
+        return $retrun;
+        break;
       default:
         return "";
         break;

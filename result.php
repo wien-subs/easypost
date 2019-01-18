@@ -43,7 +43,7 @@ pre {
     <div class="navbar-fixed">
       <nav>
         <div class="nav-wrapper">
-          <a href="index.php" class="brand-logo center">Wien-Subs EasyPost</a>
+          <a href="index.php" class="brand-logo center">EasyPost</a>
           <ul id="nav-mobile" class="left hide-on-med-and-down">
             <li class="active"><a href="index.php">Acasă</a></li>
           </ul>

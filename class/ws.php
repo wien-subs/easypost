@@ -16,21 +16,25 @@ class wiensubs {
 
   private function ws_ddl($data) {
     $common = new common();
-    preg_match_all('/(http:|https:|)(\/\/)[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/m', $data, $match, PREG_SET_ORDER);
+    preg_match_all('/(http:|https:|)(\/\/)[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,5}(\/\S*)?/m', $data, $match, PREG_SET_ORDER);
     $ws_ddl = '<div class="downloadbox">'.PHP_EOL;
+    $i = 0;
     foreach($match as $urls) {
+      $i++;
       $keep = $urls[0];
       $durl = $common->get_url_id($keep);
       if($durl["dl"] !== null)
         $ws_ddl .= $this->gen_ws_ddl($durl["dl"], $keep);
     }
+    if($i > 7)
+      $ws_ddl = str_replace("> Download</a>","> DDL</a>", $ws_ddl);
     $ws_ddl .='</div>';
     return $ws_ddl;
   }
 
   private function ws_tab($data) {
     $common = new common();
-    preg_match_all('/(http:|https:|)(\/\/)[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/m', $data, $match, PREG_SET_ORDER);
+    preg_match_all('/(http:|https:|)(\/\/)[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,5}(\/\S*)?/m', $data, $match, PREG_SET_ORDER);
     $ws_tab = '[restabs alignment="osc-tabs-center" responsive="false"]'.PHP_EOL;
     $i = 1;
     foreach($match as $urls) {
@@ -58,7 +62,7 @@ class wiensubs {
   }
 
   private function gen_ws_ddl($link, $class){
-    $icons = array("mega", "ol", "moe", "drive", "mp4", "fl", "kb", "tuf", "gp", "nf", "thev", "filec", "nyaa", "adex", "sfs", "yuc", "nova", "vidoza", "sit");
+    $icons = array("mega", "ol", "moe", "drive", "mp4", "fl", "kb", "tuf", "gp", "nf", "thev", "filec", "nyaa", "adex", "sfs", "yuc", "nova", "vidoza", "sit", "fb", "ma", "mr", "yup");
     if(in_array($this->ws_get_tabt_class($class), $icons))
       return '  <a href="'.$link.'" class="download '.$this->ws_get_tabt_class($class).'" target="_blank"> Download</a>'.PHP_EOL;
     else
@@ -77,13 +81,13 @@ class wiensubs {
           return "mp4";
         break;
       case (strpos($url, "yourupload.com") == true):
-          return "YourUP";
+          return "yup";
         break;
       case (strpos($url, "mega.nz") == true):
           return "mega";
         break;
       case (strpos($url, "fembed.com") == true):
-          return "FemBed";
+          return "fb";
         break;
       case (strpos($url, "nofile.io") == true):
           return "nf";
@@ -92,13 +96,31 @@ class wiensubs {
           return "Svid";
         break;
       case (strpos($url, "mirrorace.com") == true):
-          return "MirrAce";
+          return "ma";
         break;
       case (strpos($url, "mir.cr") == true || strpos($url, "mirrored.to") == true):
-          return "MirrorRed";
+          return "mr";
         break;
       case (strpos($url, "video.sibnet.ru") == true):
-        return "Sibnet";
+          return "Sibnet";
+        break;
+      case (strpos($url, "sendit.cloud") == true):
+          return "sit";
+        break;
+      case (strpos($url, "tusfiles.com") == true):
+          return "tuf";
+        break;
+      case (strpos($url, "filelist.ro") == true):
+          return "fl";
+        break;
+      case (strpos($url, "nyaa.si") == true):
+          return "nyaa";
+        break;
+      case (strpos($url, "go4up.com") == true):
+          return "gp";
+        break;
+      case (strpos($url, "ok.ru") == true):
+          return "OK";
         break;
       default:
         return "ERROR $url";
