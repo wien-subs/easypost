@@ -1,12 +1,12 @@
 <?php
 class shinobi {
-  public function sh($data, $who, $img) {
+  public function sh($data, $who, $img, $beta = false, $part = false, $epname = null) {
     $images = new img();
     $images = $images->image($img);
     $header = "
   [CENTER]
   [IMG]".$images."[/IMG]
-  [B] - Episodul 
+  [B] ".$epname." 
   Tradus în limba română - Download & Online[/B]
   ".PHP_EOL;
 
@@ -15,14 +15,23 @@ class shinobi {
   Verificare: ".$who["tlc"]."
   Editare: ".$who["edit"]."
   Encodare: ".$who["enc"]."[/I]
-
+".PHP_EOL;
+  $middle_part = "
   Realizată în parteneriat cu Wien-Subs
   [URL='https://www.wien-subs.ro/'][IMG]https://wien-subs.ro/asset/wsh.png[/IMG][/URL]
 
   [B][I]Vitionare Plăcută![/I][/B]
-  ";
-  return $header.$this->sh_ddl($data).$middle.$this->sh_online($data);
-    
+  ".PHP_EOL;
+  $footer_beta = "[B][I]Versiune Temporară![/I][/B]".PHP_EOL;
+  
+  if($part == true && $beta == true)
+    return $header.$this->sh_ddl($data).$middle.$middle_part.$footer_beta.$this->sh_online($data);
+  elseif($part == true && $beta == false)
+    return $header.$this->sh_ddl($data).$middle.$middle_part.$this->sh_online($data);
+  elseif($part == false && $beta == true)
+    return $header.$this->sh_ddl($data).$middle.$footer_beta.$this->sh_online($data);
+  else
+    return $header.$this->sh_ddl($data).$middle.$this->sh_online($data);
   }
 
   private function sh_online($data) {
