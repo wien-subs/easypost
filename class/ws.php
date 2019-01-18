@@ -1,8 +1,17 @@
 <?php
 class wiensubs {
-  public function ws($data, $who) {
+  public function ws($data, $who, $beta = false, $part = false) {
     $header = '<div class="alert alert-info text-center"><a href="https://shinobifansub.com/" taget="_blank"><i class="fas fa-handshake"></i> Serie realizată în parteneriat cu Shinobi-Fansub <i class="fas fa-handshake"></i></a><br/><span title="Traducere realizată de '.$who["tl"].'" data-toggle="tooltip" data-html="true"> <i class="fas fa-file-alt"></i> '.$who["tl"].'</span> <span title="Corectare realizată de '.$who["tlc"].' " data-toggle="tooltip" data-html="true"><i class="fas fa-pencil-alt"></i> '.$who["tlc"].'</span> <span title="Karoake &amp; K-T &amp; TypeSetting realizat de '.$who["edit"].'" data-toggle="tooltip" data-html="true"><i class="fab fa-gripfire"></i> '.$who["edit"].'</span> <span title="Encodare realizată de '.$who["enc"].'" data-toggle="tooltip" data-html="true"><i class="fas fa-cogs"></i> '.$who["enc"].'</span></div><div class="text-center"><a href="https://shinobifansub.com/" target="_blank"><img src="https://wien-subs.ro/asset/shinobi.png" alt="Shinobi-Fansub"/></a></div>';
-    return $header.$this->ws_tab($data).$this->ws_ddl($data);
+    $lq = '<h3 class="text-center" data-toggle="tooltip" data-placement="top" title="Aceasta versiune poate conține, greșeli gramaticale, greșeli de exprimare, calitatea video-ului scăzută. Echipa Wien-Subs nu își asumă responsabilitatea pentru acest episod. Îl vizionați pe propiul risc."> <i class="fas fa-low-vision text-danger"></i> Low Quality <i class="fas fa-low-vision text-danger"></i></h3>';
+    
+    if($part == true && $beta == true)
+      return $lq.$header.$this->ws_tab($data);
+    elseif($part == true && $beta == false)
+      return $header.$this->ws_tab($data).$this->ws_ddl($data);
+    elseif($part == false && $beta == true)
+      return $lq.$this->ws_tab($data);
+    else
+      return $this->ws_tab($data).$this->ws_ddl($data);
   }
 
   private function ws_ddl($data) {

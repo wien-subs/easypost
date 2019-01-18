@@ -1,12 +1,23 @@
 <?php
 header('X-XSS-Protection:0');
+error_reporting(E_ALL ^ E_NOTICE);
 include('function.php');
 $data = $_POST["source"];
+$ep = $_POST["eps_name"];
+
+if(!empty(@$_POST["inpart"]))
+  $part = true;
+else
+  $part = false;
+if(!empty(@$_POST["beta"]))
+  $beta = true;
+else
+  $beta = false;
 $whos = array(
-  "tl"=>$_POST["tl"],
-  "tlc"=>$_POST["tlc"],
-  "edit"=>$_POST["edit"],
-  "enc"=>$_POST["enc"]);
+  "tl"=>(!empty($_POST["tl"]) ? $_POST["tl"] : "Unknown"),
+  "tlc"=>(!empty($_POST["tlc"]) ? $_POST["tlc"] : "Unknown"),
+  "edit"=>(!empty($_POST["edit"]) ? $_POST["edit"] : "Unknown"),
+  "enc"=>(!empty($_POST["enc"]) ? $_POST["enc"] : "Unknown"));
 if(!empty(@$_FILES['img']["tmp_name"])){
   $img = $_FILES['img'];
   $filename = $img['tmp_name'];
@@ -14,6 +25,7 @@ if(!empty(@$_FILES['img']["tmp_name"])){
   $ds = fread($handle, filesize($filename));
   $pvars   = array('image' => base64_encode($ds));
 }
+$db->register_eps($ep, $ws->ws($data, $whos, $beta, $part), $sh->sh($data, $whos, $pvars, $beta, $part, $ep));
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,7 +53,7 @@ pre {
     <div class="container">
       <div class="col s12">
         <pre id="wscopy">
-          <?php echo htmlentities($ws->ws($data,$whos));?>
+          <?php echo htmlentities($ws->ws($data, $whos, $beta, $part));?>
         </pre>
       </div>
       <div class="center">
@@ -51,7 +63,7 @@ pre {
       </div>
       <div class="col s12">
         <pre id="shcopy">
-          <?php echo htmlentities($sh->sh($data, $whos, $pvars));?>
+          <?php echo htmlentities($sh->sh($data, $whos, $pvars, $beta, $part, $ep));?>
         </pre>
       </div>
       <div class="center">

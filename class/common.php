@@ -1,6 +1,16 @@
 <?php
 class common {
-  function get_url_id($url) {
+  public function get_auto_complete_index($table) {
+    global $sql;
+    $data = $sql->query("select * from `$table`");
+    $keepme = "";
+    while($row = $data->fetch_object()) {
+      $keepme .= '"'.$row->name.'": null,'.PHP_EOL;
+    }
+    return $keepme;
+  }
+  
+  public function get_url_id($url) {
     switch($url) {
       case (strpos($url, "stream.moe") == true):
         preg_match('~[[:alnum:]]{16,18}~', $url, $pattern);
@@ -107,7 +117,7 @@ class common {
     }
   }
 
-  function iframe($iurl) {
+  public function iframe($iurl) {
     return '<iframe src="'.$iurl.'" width="640" height="380" scrolling="no" frameborder="0" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen></iframe>';
   }
 
