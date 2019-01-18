@@ -36,7 +36,7 @@ class shinobi {
 
   private function sh_online($data) {
     $common = new common();
-    preg_match_all('/(http:|https:|)(\/\/)[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/m', $data, $match, PREG_SET_ORDER);
+    preg_match_all('/(http:|https:|)(\/\/)[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,5}(\/\S*)?/m', $data, $match, PREG_SET_ORDER);
     $sh_online = '';
     $i=0;
     foreach($match as $urls) {
@@ -67,6 +67,9 @@ class shinobi {
       case (strpos($url, "mega.nz") == true):
           return '[SPOILER="Sursa '.$i.'"][MEDIA=mega]'.str_replace("#", "",$iframe_id).'[/MEDIA][/SPOILER]'.PHP_EOL;
         break;
+      case (strpos($url, "sendit.cloud") == true):
+          return '[SPOILER="Sursa '.$i.'"][MEDIA=senditcloud]'.str_replace("#", "",$iframe_id).'[/MEDIA][/SPOILER]'.PHP_EOL;
+        break;
       default:
         return "";
         break;
@@ -76,7 +79,7 @@ class shinobi {
 
   private function sh_ddl($data) {
     $common = new common();
-    preg_match_all('/(http:|https:|)(\/\/)[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/m', $data, $match, PREG_SET_ORDER);
+    preg_match_all('/(http:|https:|)(\/\/)[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,5}(\/\S*)?/m', $data, $match, PREG_SET_ORDER);
     $sh_ddl = '[B]720p:[/B]';
     foreach($match as $link) {
       $keep = $link[0];
@@ -119,6 +122,9 @@ class shinobi {
       case (strpos($url, "filelist.ro") == true):
           return ":filelist:";
         break;
+      case (strpos($url, "sendit.cloud") == true):
+          return ":sendit:";
+        break;
       case (strpos($url, "nyaa.si") == true):
           return ":nyaa:";
         break;
@@ -126,7 +132,7 @@ class shinobi {
           return ":mirror:";
         break;
       default:
-        return "";
+        return ":ddl:";
         break;
     }
   }

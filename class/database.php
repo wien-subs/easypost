@@ -9,7 +9,18 @@ class db {
     $data_sh = base64_encode($data_sh);
     $name = $sql->real_escape_string($name);
     $time = time();
+    if(strlen($name) < 3)
+      $name = "Necunoscut";
     $sql->query("INSERT INTO `ep_logs` (`a_name`,`data_ws`,`data_sh`, `time`) VALUES ('$name', '$data_ws', '$data_sh', '$time')");
     return true;
+  }
+  public function showlogs() {
+    global $sql;
+    $data = $sql->query("select * from `ep_logs`");
+    $keep = "";
+    while($row = $data->fetch_object()) {
+      $keep .="<tr><td>".$row->id."</td><td><a href='show.php?id=".$row->id."'>".$row->a_name."</a></td><td>".date("d.m.Y @ h:i:s", $row->time)."</td></tr>";
+    }
+    return $keep;
   }
 }
