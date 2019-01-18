@@ -70,6 +70,9 @@ class shinobi {
       case (strpos($url, "sendit.cloud") == true):
           return '[SPOILER="Sursa '.$i.'"][MEDIA=senditcloud]'.str_replace("#", "",$iframe_id).'[/MEDIA][/SPOILER]'.PHP_EOL;
         break;
+      case (strpos($url, "mirrorace.com") == true):
+          return '[SPOILER="Sursa '.$i.'"][MEDIA=mirrorace]'.str_replace("#", "",$iframe_id).'[/MEDIA][/SPOILER]'.PHP_EOL;
+        break;
       default:
         return "";
         break;
@@ -102,7 +105,7 @@ class shinobi {
           return ":mp4u:";
         break;
       case (strpos($url, "yourupload.com") == true):
-          return "YU";
+          return ":YU:";
         break;
       case (strpos($url, "fembed.com") == true):
           return ":mirror:";
@@ -116,7 +119,7 @@ class shinobi {
       case (strpos($url, "mega.nz") == true):
           return ":meganz:";
         break;
-      case (strpos($url, "goole") == true):
+      case (strpos($url, "google") == true):
           return ":gdrive:";
         break;
       case (strpos($url, "filelist.ro") == true):

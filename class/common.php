@@ -25,7 +25,7 @@ class common {
         preg_match('~[[:alnum:]_+-]{9,12}~',$url, $pattern);
         $retrun = array(
           "dl" => "//openload.co/f".$pattern[0],
-          "iframe" => "//openload.co/embed".$pattern[0],
+          "iframe" => "//openload.co/embed/".$pattern[0],
           "iframe_shinobi" => true,
           "source_id" => $pattern[0]);
         return $retrun;
@@ -79,8 +79,8 @@ class common {
         preg_match('~/m/([[:alnum:]]{4,6})~',$url, $pattern);
         $retrun = array(
           "dl" => "//mirrorace.com/m/".$pattern[1],
-          "iframe" => "//mirrorace.com/embed/".$pattern[1],
-          "iframe_shinobi" => false,
+          "iframe" => "//mirrorace.com/m/embed/".$pattern[1],
+          "iframe_shinobi" => true,
           "source_id" => $pattern[1]);
         return $retrun;
         break;
@@ -175,4 +175,18 @@ class common {
     return '<iframe src="'.$iurl.'" width="640" height="380" scrolling="no" frameborder="0" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen></iframe>';
   }
 
+  public function get_log_by_id($id) {
+    global $sql;
+    $data = $sql->query("select * from `ep_logs` where `id`='".$sql->real_escape_string($id)."'");
+    if($data->num_rows > 0) {
+      $data = $data->fetch_object();
+      return array("title" => $data->a_name,
+      "time" => date("d.m.Y @ h:i:s", $data->time),
+      "ws" => htmlentities(base64_decode($data->data_ws)),
+      "sh" => htmlentities(base64_decode($data->data_sh))
+      );
+    }
+    else
+      return false;
+  }
 }

@@ -8,6 +8,7 @@ class db {
     $data_ws = base64_encode($data_ws);
     $data_sh = base64_encode($data_sh);
     $name = $sql->real_escape_string($name);
+    date_default_timezone_set('Europe/Bucharest');
     $time = time();
     if(strlen($name) < 3)
       $name = "Necunoscut";
@@ -16,7 +17,7 @@ class db {
   }
   public function showlogs() {
     global $sql;
-    $data = $sql->query("select * from `ep_logs`");
+    $data = $sql->query("select * from `ep_logs` Order by `id` DESC");
     $keep = "";
     while($row = $data->fetch_object()) {
       $keep .="<tr><td>".$row->id."</td><td><a href='show.php?id=".$row->id."'>".$row->a_name."</a></td><td>".date("d.m.Y @ h:i:s", $row->time)."</td></tr>";
