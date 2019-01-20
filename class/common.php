@@ -24,7 +24,7 @@ class common {
       case (strpos($url, "openload.co") == true):
         preg_match('~[[:alnum:]_+-]{9,12}~',$url, $pattern);
         $retrun = array(
-          "dl" => "//openload.co/f".$pattern[0],
+          "dl" => "//openload.co/f/".$pattern[0],
           "iframe" => "//openload.co/embed/".$pattern[0],
           "iframe_shinobi" => true,
           "source_id" => $pattern[0]);
@@ -105,10 +105,10 @@ class common {
       case (strpos($url, "mega.nz") == true):
         preg_match('~\S#([[:ascii:]]){10,53}~',$url, $pattern);
         $retrun = array(
-          "dl" => "//mega.nz/".$pattern[0],
-          "iframe" => "//mega.nz/embed".$pattern[0],
+          "dl" => "//mega.nz/".str_replace('/','',$pattern[0]),
+          "iframe" => "//mega.nz/embed".str_replace('/','',$pattern[0]),
           "iframe_shinobi" => true,
-          "source_id" => $pattern[0]);
+          "source_id" => str_replace('/','',$pattern[0]));
         return $retrun;
         break;
       case (strpos(strtolower($url), "sendit.cloud") == true):
