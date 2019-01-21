@@ -62,6 +62,16 @@ pre {
             Copy Shinobi to Clipboard
         </button>
       </div>
+      <div class="col s12">
+        <pre id="tagscopy">
+          <?php echo htmlentities($common->get_tags($data["title"]));?>
+        </pre>
+      </div>
+      <div class="center">
+        <button class="btn waves-effect waves-light btn-large" onclick="M.toast({html: 'Etichetele se află în clipboard!'})" data-clipboard-target="#tagscopy">
+            Copy Tags to Clipboard
+        </button>
+      </div>
     </div>
     <script type="text/javascript" src="js/clipboard.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
