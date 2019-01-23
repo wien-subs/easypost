@@ -71,6 +71,18 @@ class wiensubs {
 
   private function ws_get_tabt_class($url) {
     switch($url) {
+      case (strpos($url, "drive.google.com") == true):
+          return "drive";
+        break;
+      case (strpos($url, "vidoza.net") == true):
+          return "Vidz";
+        break;
+      case (strpos($url, "dailymotion.com") == true):
+          return "Daily";
+        break;
+      case (strpos($url, "streamango.com") == true):
+          return "Sgo";
+        break;
       case (strpos($url, "stream.moe") == true):
           return "moe";
         break;
@@ -116,6 +128,12 @@ class wiensubs {
       case (strpos($url, "nyaa.si") == true):
           return "nyaa";
         break;
+      case (strpos($url, "anime-torrents.ro") == true):
+          return "Anime-Torrents";
+        break;
+      case (strpos($url, "anidex.info") == true):
+          return "adex";
+        break;
       case (strpos($url, "go4up.com") == true):
           return "gp";
         break;
@@ -123,7 +141,7 @@ class wiensubs {
           return "OK";
         break;
       default:
-        return "ERROR $url";
+        return "";
         break;
     }
   }
