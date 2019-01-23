@@ -38,40 +38,44 @@ class shinobi {
     $common = new common();
     preg_match_all('/(http:|https:|)(\/\/)[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,5}(\/\S*)?/m', $data, $match, PREG_SET_ORDER);
     $sh_online = '';
-    $i=0;
     foreach($match as $urls) {
       $keep = $urls[0];
       $durl = $common->get_url_id($keep);
       if($durl["iframe"] !== null && $durl["iframe_shinobi"] == true) {
-        $i++;
-        $sh_online .= $this->get_sh_online($keep, $durl["source_id"], $i);
+        $sh_online .= $this->get_sh_online($keep, $durl["source_id"]);
       }
     }
     return $sh_online;
   }
 
-  private function get_sh_online($url, $iframe_id, $i) {
+  private function get_sh_online($url, $iframe_id) {
     switch($url) {
+      case (strpos($url, "drive.google.com") == true):
+          return '[SPOILER="GDrive"][MEDIA=googlevideo]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
+        break;
+      case (strpos($url, "dailymotion.com") == true):
+          return '[SPOILER="DailyMotion"][MEDIA=dailymotion]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
+        break;
       case (strpos($url, "stream.moe") == true):
-          return '[SPOILER="Sursa '.$i.'"][MEDIA=stream]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
+          return '[SPOILER="Stream"][MEDIA=stream]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
         break;
       case (strpos($url, "openload.co") == true):
-          return '[SPOILER="Sursa '.$i.'"][MEDIA=openload]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
+          return '[SPOILER="OpenLoad"][MEDIA=openload]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
         break;
       case (strpos($url, "mp4upload.com") == true):
-          return '[SPOILER="Sursa '.$i.'"][MEDIA=mp4upload]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
+          return '[SPOILER="Mp4Up"][MEDIA=mp4upload]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
         break;
       case (strpos($url, "sendvid.com") == true):
-          return '[SPOILER="Sursa '.$i.'"][MEDIA=sendvid]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
+          return '[SPOILER="SendVid"][MEDIA=sendvid]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
         break;
       case (strpos($url, "mega.nz") == true):
-          return '[SPOILER="Sursa '.$i.'"][MEDIA=mega]'.str_replace("#", "",$iframe_id).'[/MEDIA][/SPOILER]'.PHP_EOL;
+          return '[SPOILER="MEGA"][MEDIA=mega]'.str_replace("#", "",$iframe_id).'[/MEDIA][/SPOILER]'.PHP_EOL;
         break;
       case (strpos($url, "sendit.cloud") == true):
-          return '[SPOILER="Sursa '.$i.'"][MEDIA=senditcloud]'.str_replace("#", "",$iframe_id).'[/MEDIA][/SPOILER]'.PHP_EOL;
+          return '[SPOILER="SendITcloud"][MEDIA=senditcloud]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
         break;
       case (strpos($url, "mirrorace.com") == true):
-          return '[SPOILER="Sursa '.$i.'"][MEDIA=mirrorace]'.str_replace("#", "",$iframe_id).'[/MEDIA][/SPOILER]'.PHP_EOL;
+          return '[SPOILER="MirrorAce"][MEDIA=mirrorace]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
         break;
       default:
         return "";
@@ -97,6 +101,9 @@ class shinobi {
     switch($url) {
       case (strpos($url, "stream.moe") == true):
           return ":stream:";
+        break;
+      case (strpos($url, "drive.google.com") == true):
+          return ":gdrive:";
         break;
       case (strpos($url, "openload.co") == true):
           return ":openload:";
@@ -130,6 +137,12 @@ class shinobi {
         break;
       case (strpos($url, "nyaa.si") == true):
           return ":nyaa:";
+        break;
+      case (strpos($url, "anime-torrents.ro") == true):
+          return ":torrent:";
+        break;
+      case (strpos($url, "anidex.info") == true):
+          return ":torrent:";
         break;
       case (strpos($url, "mir.cr") == true || strpos($url, "mirrored.to") == true):
           return ":mirror:";
