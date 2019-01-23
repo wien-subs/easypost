@@ -23,6 +23,33 @@ class common {
   
   public function get_url_id($url) {
     switch($url) {
+      case (strpos($url, "dailymotion.com") == true):
+        preg_match('~(/embed/video/|/video/)([[:alnum:]]{7,9})~', $url, $pattern);
+        $retrun = array(
+          "dl" => null,
+          "iframe" => "//www.dailymotion.com/embed/video/".$pattern[2],
+          "iframe_shinobi" => true,
+          "source_id" => $pattern[2]);
+        return $retrun;
+        break;
+      case (strpos($url, "drive.google.com") == true):
+        preg_match('~(/d/)(([A-Za-z0-9_=+-]){24,})~', $url, $pattern);
+        $retrun = array(
+          "dl" => "//drive.google.com/file/d/".$pattern[2]."/view?usp=sharing",
+          "iframe" => "//drive.google.com/file/d/".$pattern[2]."/preview",
+          "iframe_shinobi" => true,
+          "source_id" => $pattern[2]);
+        return $retrun;
+        break;
+      case (strpos($url, "vidoza.net") == true):
+        preg_match('~([[:alnum:]]){12,13}~', $url, $pattern);
+        $retrun = array(
+          "dl" => "//vidoza.net/".$pattern[0].".html",
+          "iframe" => "//vidoza.net/embed-".$pattern[0].".html",
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[0]);
+        return $retrun;
+        break;
       case (strpos($url, "stream.moe") == true):
         preg_match('~[[:alnum:]]{16,18}~', $url, $pattern);
         $retrun = array(
@@ -38,6 +65,15 @@ class common {
           "dl" => "//openload.co/f/".$pattern[0],
           "iframe" => "//openload.co/embed/".$pattern[0],
           "iframe_shinobi" => true,
+          "source_id" => $pattern[0]);
+        return $retrun;
+        break;
+      case (strpos($url, "streamango.com") == true):
+        preg_match('~[[:alnum:]_+-]{15,18}~',$url, $pattern);
+        $retrun = array(
+          "dl" => "//streamango.com/f/".$pattern[0],
+          "iframe" => "//streamango.com/embed/".$pattern[0],
+          "iframe_shinobi" => false,
           "source_id" => $pattern[0]);
         return $retrun;
         break;
@@ -171,6 +207,22 @@ class common {
         preg_match('~[[:digit:]]{6,7}~',$url, $pattern);
         $retrun = array(
           "dl" => "//nyaa.si/veiw/".$pattern[0],
+          "iframe" => null,
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[0]);
+        return $retrun;
+      case (strpos($url, "anidex.info") == true):
+        preg_match('~[[:digit:]]{5,7}~',$url, $pattern);
+        $retrun = array(
+          "dl" => "//anidex.info/torrent/".$pattern[0],
+          "iframe" => null,
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[0]);
+        return $retrun;
+      case (strpos($url, "anime-torrents.ro") == true):
+        preg_match('~[[:digit:]]{1,5}~',$url, $pattern);
+        $retrun = array(
+          "dl" => "//anime-torrents.ro/torrent/view/".$pattern[0],
           "iframe" => null,
           "iframe_shinobi" => false,
           "source_id" => $pattern[0]);
