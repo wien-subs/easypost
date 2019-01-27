@@ -49,44 +49,44 @@ Apasă butonul corespunzător (Copy Wien-Subs to Clipboard / Copy Shinobi to Cli
 ### Surse suportate (atât pentru shinobi cât și pentru wien-subs)
 
 
-- stream[dot]moe
+- stream[punct]moe
 
-- openload[dot]co
+- openload[punct]co
 
-- mp4upload[dot]com
+- mp4upload[punct]com
 
-- yourupload[dot]com
+- yourupload[punct]com
 
-- fembed[dot]com
+- fembed[punct]com
 
-- nofile[dot]io
+- nofile[punct]io
 
-- sendvid[dot]com
+- sendvid[punct]com
 
-- mirrorace[dot]com
+- mirrorace[punct]com
 
-- mir[dot]cr
+- mir[punct]cr
 
-- video[dot]sibnet[dot]ru
+- video[punct]sibnet[punct]ru
 
-- mega[dot]nz
+- mega[punct]nz
 
-- tusfiles[dot]com
+- tusfiles[punct]com
 
-- sendit[dot]cloud
+- sendit[punct]cloud
 
-- go4up[dot]com
+- go4up[punct]com
 
-- ok[dot]ru
+- ok[punct]ru
 
-- filelist[dot]ro
+- filelist[punct]ro
 
-- nyaa[dot]si
+- nyaa[punct]si
 
-- anime-torrents[dot]ro
+- anime-torrents[punct]ro
 
-- dailymotion[dot]com
+- dailymotion[punct]com
 
-- drive[dot]google[dot]com
+- drive[punct]google[punct]com
 
-- vidoza[dot]com
+- vidoza[punct]com
