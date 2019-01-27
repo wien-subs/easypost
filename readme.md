@@ -90,3 +90,7 @@ Apasă butonul corespunzător (Copy Wien-Subs to Clipboard / Copy Shinobi to Cli
 - drive[punct]google[punct]com
 
 - vidoza[punct]com
+
+
+------------------
+Scriptul nu este sigur din punct de vedere al securității, având în vedere că suportă atât plaintext cât și HTML, nu avem cum să-l numim sigur.
