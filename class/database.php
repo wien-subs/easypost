@@ -1,6 +1,6 @@
 <?php
 
-$sql = new mysqli("localhost", "root", "Florin12", "tla");
+$sql = new mysqli("IP_OF_SERVER", "USER", "PASSWORD", "DB_NAME");
 
 class db {
   public function register_eps($name, $data_ws, $data_sh) {
