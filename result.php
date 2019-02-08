@@ -19,11 +19,26 @@ $whos = array(
   "edit"=>(!empty($_POST["edit"]) ? $_POST["edit"] : "Unknown"),
   "enc"=>(!empty($_POST["enc"]) ? $_POST["enc"] : "Unknown"));
 if(!empty(@$_FILES['img']["tmp_name"])){
-  $img = $_FILES['img'];
-  $filename = $img['tmp_name'];
-  $handle = fopen($filename, "r");
-  $ds = fread($handle, filesize($filename));
-  $pvars   = array('image' => base64_encode($ds));
+    $handle = new upload($_FILES['img']);
+    $fn = time().'image_resized';
+    $dir = __DIR__ . '\\temp_img\\';
+    if($handle->uploaded) {
+      $handle->file_new_name_body   = $fn;
+      $handle->image_resize         = true;
+      $handle->file_force_extension = true;
+      $handle->image_convert = 'jpg';
+      $handle->file_new_name_ext = 'jpg';
+      $handle->image_x = 476;
+      $handle->image_y = 264;
+      $handle->process($dir);
+      if($handle->processed) {
+        $handle->clean();
+        $read = fopen($dir.$fn.".jpg", "r");
+        $ds = fread($read, filesize($dir.$fn.".jpg"));
+        $pvars=array('image' => base64_encode($ds));
+        unlink($dir.$fn.".jpg");
+      }
+    }
 }
 $db->register_eps($ep, $ws->ws($data, $whos, $beta, $part), $sh->sh($data, $whos, $pvars, $beta, $part, $ep));
 ?>
