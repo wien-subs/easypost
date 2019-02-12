@@ -1,8 +1,11 @@
 <?php
 header('X-XSS-Protection:0');
+php_uname();
 error_reporting(E_ALL ^ E_NOTICE);
 include('function.php');
 $data = $_POST["source"];
+if(empty(@$_POST["source"]))
+  die("Source are empty. That is not allowed");
 $ep = $_POST["eps_name"];
 
 if(!empty(@$_POST["inpart"]))
@@ -21,7 +24,7 @@ $whos = array(
 if(!empty(@$_FILES['img']["tmp_name"])){
     $handle = new upload($_FILES['img']);
     $fn = time().'image_resized';
-    $dir = __DIR__ . '\\temp_img\\';
+    $dir = __DIR__ . (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN' ?  '//temp_img//' : '/temp_img/');
     if($handle->uploaded) {
       $handle->file_new_name_body   = $fn;
       $handle->image_resize         = true;

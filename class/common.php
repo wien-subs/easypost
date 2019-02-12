@@ -228,6 +228,15 @@ class common {
           "source_id" => $pattern[0]);
         return $retrun;
         break;
+      case (strpos($url, "s.go.ro") == true):
+        preg_match('~(([[:alnum:]]){7,9})~',$url, $pattern);
+        $retrun = array(
+          "dl" => "//s.go.ro/".$pattern[0],
+          "iframe" => null,
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[0]);
+        return $retrun;
+        break;
       default:
         return "";
         break;
