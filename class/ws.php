@@ -139,6 +139,8 @@ class wiensubs {
         break;
       case (strpos($url, "ok.ru") == true):
           return "OK";
+      case (strpos($url, "s.go.ro") == true):
+          return "digi";
         break;
       default:
         return "";
