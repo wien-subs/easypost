@@ -84,8 +84,8 @@ include('function.php');
             <div class="switch">
               <label>
                 Off
-                <input type="checkbox">
-                <span class="lever" name="beta" value="true"></span>
+                <input type="checkbox" name="beta" value="true">
+                <span class="lever"></span>
                 On
               </label>
               <label class="grey-text text-darken-4"> Variantă "BETA"/"Low Quality"? </label>
