@@ -13,7 +13,13 @@ class db {
     if(strlen($name) < 3)
       $name = "Necunoscut";
     $sql->query("INSERT INTO `ep_logs` (`a_name`,`data_ws`,`data_sh`, `time`) VALUES ('$name', '$data_ws', '$data_sh', '$time')");
-    return true;
+    return ($this->count_rows() + 1);
+  }
+  private function count_rows() {
+    global $sql;
+    $row = $sql->query("select * from `ep_logs`");
+    $row = $row->num_rows;
+    return $row;
   }
   public function showlogs() {
     global $sql;

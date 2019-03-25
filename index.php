@@ -49,7 +49,7 @@ include('function.php');
             </div>
             <div class="input-field col s3">
               <input id="enc" type="text" class="validate" name="enc">
-              <label for="enc">Encodare</label>
+              <label for="enc">Encodare (Lasă gol pentru manga)</label>
             </div>
           </div>
           <div class="row">
@@ -91,8 +91,28 @@ include('function.php');
               <label class="grey-text text-darken-4"> Variantă "BETA"/"Low Quality"? </label>
             </div>
           </div>
+          <div class="row">
+            <div class="switch">
+              <label>
+                DVD/HDTV/WEBDL
+                <input type="checkbox" name="bluray" value="true">
+                <span class="lever"></span>
+                Bluray
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="switch">
+              <label>
+                Anime
+                <input type="checkbox" name="manga" value="True">
+                <span class="lever"></span>
+                Manga
+              </label>
+            </div>
+          </div>
           <div class="center">
-            <button class="btn waves-effect waves-light" type="submit" name="action" value="ok">Submit
+            <button class="btn waves-effect waves-light" type="submit" name="action" value="add_anime">Submit
               <i class="material-icons right">send</i>
             </button>
           </div>

@@ -185,6 +185,15 @@ class common {
           "source_id" => $pattern[0]);
         return $retrun;
         break;
+      case (strpos($url, "girlshare.ro") == true):
+        preg_match('~(\d){7,}.(\d)~',$url, $pattern);
+        $retrun = array(
+          "dl" => "//girlshare.ro/".$pattern[0],
+          "iframe" => null,
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[0]);
+        return $retrun;
+        break;
       case (strpos($url, "ok.ru") == true):
         preg_match('~[[:digit:]]{11,15}~',$url, $pattern);
         $retrun = array(
