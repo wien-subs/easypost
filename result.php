@@ -3,47 +3,7 @@ header('X-XSS-Protection:0');
 php_uname();
 error_reporting(E_ALL ^ E_NOTICE);
 include('function.php');
-$data = $_POST["source"];
-if(empty(@$_POST["source"]))
-  die("Source are empty. That is not allowed");
-$ep = $_POST["eps_name"];
 
-if(!empty(@$_POST["inpart"]))
-  $part = true;
-else
-  $part = false;
-if(!empty(@$_POST["beta"]))
-  $beta = true;
-else
-  $beta = false;
-$whos = array(
-  "tl"=>(!empty($_POST["tl"]) ? $_POST["tl"] : "Unknown"),
-  "tlc"=>(!empty($_POST["tlc"]) ? $_POST["tlc"] : "Unknown"),
-  "edit"=>(!empty($_POST["edit"]) ? $_POST["edit"] : "Unknown"),
-  "enc"=>(!empty($_POST["enc"]) ? $_POST["enc"] : "Unknown"));
-if(!empty(@$_FILES['img']["tmp_name"])){
-    $handle = new upload($_FILES['img']);
-    $fn = time().'image_resized';
-    $dir = __DIR__ . (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN' ?  '//temp_img//' : '/temp_img/');
-    if($handle->uploaded) {
-      $handle->file_new_name_body   = $fn;
-      $handle->image_resize         = true;
-      $handle->file_force_extension = true;
-      $handle->image_convert = 'jpg';
-      $handle->file_new_name_ext = 'jpg';
-      $handle->image_x = 476;
-      $handle->image_y = 264;
-      $handle->process($dir);
-      if($handle->processed) {
-        $handle->clean();
-        $read = fopen($dir.$fn.".jpg", "r");
-        $ds = fread($read, filesize($dir.$fn.".jpg"));
-        $pvars=array('image' => base64_encode($ds));
-        unlink($dir.$fn.".jpg");
-      }
-    }
-}
-$db->register_eps($ep, $ws->ws($data, $whos, $beta, $part), $sh->sh($data, $whos, $pvars, $beta, $part, $ep));
 ?>
 <!DOCTYPE html>
 <html>
@@ -73,7 +33,7 @@ pre {
     <div class="container">
       <div class="col s12">
         <pre id="wscopy">
-          <?php echo htmlentities($ws->ws($data, $whos, $beta, $part));?>
+          <?php echo htmlentities($ws->ws($data, $whos, $beta, $part, $manga));?>
         </pre>
       </div>
       <div class="center">
@@ -83,7 +43,7 @@ pre {
       </div>
       <div class="col s12">
         <pre id="shcopy">
-          <?php echo htmlentities($sh->sh($data, $whos, $pvars, $beta, $part, $ep));?>
+          <?php echo htmlentities($sh->sh($data, $whos, $pvars, $beta, $part, $ep, $manga));?>
         </pre>
       </div>
       <div class="center">

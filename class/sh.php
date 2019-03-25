@@ -1,6 +1,6 @@
 <?php
 class shinobi {
-  public function sh($data, $who, $img, $beta = false, $part = false, $epname = null) {
+  public function sh($data, $who, $img, $beta = false, $part = false, $epname = null, $manga = false) {
     $images = new img();
     $images = $images->image($img);
     $header = "
@@ -10,17 +10,23 @@ class shinobi {
   Tradus în limba română - Download & Online[/B]
   ".PHP_EOL;
 
+  if($manga == false)
     $middle="
   [I]Traducere: ".$who["tl"]."
   Verificare: ".$who["tlc"]."
   Editare: ".$who["edit"]."
   Encodare: ".$who["enc"]."[/I]
 ".PHP_EOL;
+  else
+    $middle="
+  [I]Traducere: ".$who["tl"]."
+  Verificare: ".$who["tlc"]."
+  Editare: ".$who["edit"]."[/I]".PHP_EOL;
   $middle_part = "
   Realizată în parteneriat cu Wien-Subs
   [URL='https://www.wien-subs.ro/'][IMG]https://wien-subs.ro/asset/wsh.png[/IMG][/URL]
 
-  [B][I]Vitionare Plăcută![/I][/B]
+  [B][I]Vizionare Plăcută![/I][/B]
   ".PHP_EOL;
   $footer_beta = "[B][I]Versiune Temporară![/I][/B]".PHP_EOL;
   
