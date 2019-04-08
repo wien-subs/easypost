@@ -142,7 +142,7 @@ Type........: '.$_POST["subtype"].'
 [/center]
     ';
       $id = $db->register_eps("FileList: "+$mal["name"], $keep,null);
-      sleep(5)
+      sleep(5);
       header("Location: show.php?id=$id&meta=new");
     }
     catch (Exception $e) {
