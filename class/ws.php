@@ -140,8 +140,11 @@ class wiensubs {
       case (strpos($url, "s.go.ro") == true):
           return "digi";
         break;
+      case (strpos($url, "girlshare.ro") == true):
+          return "GS";
+        break;
       default:
-        return "";
+        return "!DDL";
         break;
     }
   }

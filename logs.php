@@ -1,25 +1,6 @@
 <?php
-include('function.php');
+include('header.php');
 ?>
-<!DOCTYPE html>
-<html>
-  <head>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  </head>
-  <body>
-    <div class="navbar-fixed">
-      <nav>
-        <div class="nav-wrapper">
-          <a href="index.php" class="brand-logo center">EasyPost</a>
-          <ul id="nav-mobile" class="left hide-on-med-and-down">
-            <li><a href="index.php">Acasa</a></li>
-            <li class="active"><a href="logs.php">Logs</a></li>
-          </ul>
-        </div>
-      </nav>
-    </div>
     <div class="container">
       <div class="row">
         <form class="col s12">
@@ -47,7 +28,6 @@ include('function.php');
                   <th>Data</th>
               </tr>
             </thead>
-
             <tbody>
               <?php echo $db->showlogs();?>
             </tbody>
@@ -57,5 +37,13 @@ include('function.php');
     </div>
     <script type="text/javascript" src="js/jquery-3.3.1.slim.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js" defer></script>
+		<script defer>
+      jQuery(document).ready(function(){
+        $(".dropdown-trigger").dropdown();
+        $('.sidenav').sidenav();
+        $('.modal').modal({'dismissible': false});
+        $('.modal').modal('open'); 
+      });
+		</script>
   </body>
 </html>

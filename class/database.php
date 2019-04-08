@@ -1,6 +1,6 @@
 <?php
 
-$sql = new mysqli("", "", "", "");
+$sql = new mysqli("localhost", "root", "Florin12", "tla");
 
 class db {
   public function register_eps($name, $data_ws, $data_sh) {
@@ -21,9 +21,12 @@ class db {
     $row = $row->num_rows;
     return $row;
   }
-  public function showlogs() {
+  public function showlogs($search = null) {
     global $sql;
-    $data = $sql->query("select * from `ep_logs` Order by `id` DESC");
+    if(is_null($search))
+      $data = $sql->query("select * from `ep_logs` Order by `id` DESC");
+    else
+      $data = $sql->query("select * from `ep_logs` WHERE `a_name` like '%$search%' ORDER BY `id` DESC");
     $keep = "";
     while($row = $data->fetch_object()) {
       $keep .="<tr><td>".$row->id."</td><td><a href='show.php?id=".$row->id."'>".$row->a_name."</a></td><td>".date("d.m.Y @ h:i:s", $row->time)."</td></tr>";

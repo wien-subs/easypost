@@ -5,6 +5,7 @@ include("class/ws.php");
 include("class/sh.php");
 include("class/image.php");
 include("class/class.upload.php");
+require_once("class/autoload.php");
 
 $ws = new wiensubs();
 $sh = new shinobi();
