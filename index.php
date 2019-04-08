@@ -4,7 +4,7 @@ include('header.php');
 
     <div class="container">
       <div class="col">
-        <form action="result.php" enctype="multipart/form-data" method="post">
+        <form action="controller.php" enctype="multipart/form-data" method="post">
           <div class="row">
             <div class="col s12">
               <div class="row">
@@ -117,19 +117,21 @@ include('header.php');
     $('.modal').modal('open'); 
     $('input.series').autocomplete({
       data: {
-        "Mob Psycho II - Episodul ": null,
-        "Kakegurui xx - Episodul ": null,
-        "Yakusoku no neverland - Episodul ": null,
-        "Doukyonin wa Hiza Tokidoki Atama no Ue - Episodul ": null,
-        "Tate no yuusha no Narigari - Episodul ": null,
+        "Tate no Yuusha no Narigari - Episodul ": null,
         "Endro - Episodul ": null,
-        "Grimms Notes - Episodul ": null,
         "Domestic na kanojo - Episodul ": null,
         "Dororo - Episodul ": null,
         "Revisions - Episodul ": null,
-        "Gotoubun no Hanayome - Episodul ": null,
-        "Mahou Shoujo Tokushusen Asuka - Episodul ": null,
         "Shingeki no Bahamut Manaria Friends - Episodul ": null,
+        "Attack on Titans - Episodul ": null,
+        "One Punch Man - Episodul": null,
+        "Bungou Stray Dogs - Episodul": null,
+        "Fairy Gone - Episodul": null,
+        "Bokutachi wa Benkyou ga Dekinai - Episodul": null,
+        "Kenja no Mago - Episodul": null,
+        "Fruits Basket - Episodul": null,
+        "Shoumetsu Toshi - Episodul": null,
+        "Kono Yo no Hate de Koi wo Utau Shoujo YU-NO - Episodul": null
       },
     });
     $('input#tl').autocomplete({
