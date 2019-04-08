@@ -73,11 +73,21 @@ pre {
         </button>
       </div>
     </div>
-    <script type="text/javascript" src="js/clipboard.min.js"></script>
-    <script type="text/javascript" src="js/materialize.min.js"></script>
-    <script>
-      M.toast({html: 'Cod-ul pentru postări a copiat din baza de date și afișiat'});
+    <script type="text/javascript" src="js/jquery-3.3.1.slim.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js" defer></script>
+    <script type="text/javascript" src="js/clipboard.min.js" defer></script>
+    <script defer>
+  jQuery(document).ready(function(){
+    $(".dropdown-trigger").dropdown();
+    $('.sidenav').sidenav();
+    $('.modal').modal({'dismissible': false});
+    $('.modal').modal('open'); 
+  });
+			<?php
+				echo (strlen(@$_GET["meta"]) > 1 ? "M.toast({html: 'Cod-ul pentru postări a fost generat'});" : "M.toast({html: 'Cod-ul pentru postări a copiat din baza de date și afișiat'});");
+				?>
       new ClipboardJS('.btn');
+      $(".dropdown-trigger").dropdown();
     </script>
   </body>
 </html>

@@ -1,5 +1,87 @@
 <?php
 class common {
+  public function sterilizeid($url) {
+    preg_match("/(?:\d*\.)?\d+/s", $url, $malid);
+    return $malid[0];
+  }
+  public function size($size) {
+    return $size/1024/1024 . "MiB";
+  }
+
+  public function youtube_id_from_url($url) {
+    $pattern =
+      '%^# Match any youtube URL
+	        (?:https?://)?  # Optional scheme. Either http or https
+	        (?:www\.)?      # Optional www subdomain
+	        (?:             # Group host alternatives
+	          youtu\.be/    # Either youtu.be,
+	        | youtube\.com  # or youtube.com
+	          (?:           # Group path alternatives
+	            /embed/     # Either /embed/
+	          | /v/         # or /v/
+	          | /watch\?v=  # or /watch\?v=
+	          )             # End path alternatives.
+	        )               # End host alternatives.
+	        ([\w-]{10,12})  # Allow 10-12 for 11 char youtube id.
+	        $%x'
+    ;
+    $result = preg_match($pattern, $url, $matches);
+    if (false !== $result) {
+      return $matches[1];
+    }
+    return false;
+  }
+
+  public function mediainfo($mi) {
+    $medainfo = new \Bhutanio\MediaInfo\Parser;
+    $data = $medainfo->parse($mi);
+
+    $ret = [
+      "fname" => $data["general"]["file_name"],
+      "container" => $data["general"]["format"],
+      "size" => $this->size($data["general"]["file_size"]),
+      "duration" => $data["general"]["duration"],
+      "codec" => $data["video"]["0"]["codec"],
+      "bit" => $data["video"]["0"]["bit_depth"],
+      "width" => $data["video"]["0"]["width"],
+      "height" => $data["video"]["0"]["height"],
+      "aspect" => $data["video"]["0"]["aspect_ratio"],
+      "bitrate" => $data["video"]["0"]["bit_rate"],
+      "audiof" => $data["audio"]["0"]["format"],
+      "ch" => $data["audio"]["0"]["channels"],
+      "abitrate" => $data["audio"]["0"]["bit_rate"],
+    ];
+    return $ret;
+  }
+
+  public function mal($id) {
+    global $sql;
+    $mal = new Jikan\Jikan;
+    $malid = $this->sterilizeid($id);
+    $malr = $mal->Anime($malid);
+    $malr = $malr->response;
+    $gen = "";
+    $studio = "";
+    foreach ($malr["studio"] as $gges)
+      $studio .= $gges["name"].", ";
+    foreach ($malr["genre"] as $gges)
+      $gen .= $gges["name"].", ";
+    $data = [
+      "name" => $malr["title"],
+      "image" => $malr["image_url"],
+      "gen" => $gen,
+      "alias" => $malr["title_english"]." ".$malr["title_synonyms"],
+      "aried" => $malr["aired_string"],
+      "dura" => $malr["duration"],
+      "rating" => $malr["rating"],
+      "desc" => $malr["synopsis"],
+      "url" => $malr["link_canonical"],
+      "eps" => $malr["episodes"],
+      "studio" => $studio,
+      "source" => $malr["source"],
+    ];
+    return $data;
+  }
   public function get_tags($name) {
     if(!strpos($name, "Necunoscut")) {
       preg_match('~^(.*) (-|–) (.*|[[:digit:]]{2,3})~m', $name, $pattern);
@@ -96,12 +178,12 @@ class common {
         return $retrun;
         break;
       case (strpos($url, "fembed.com") == true):
-        preg_match('~[[:alnum:]]{10,13}~',$url, $pattern);
+        preg_match('~(/v/|/f/)([[:alnum:]-+*]{10,13})~',$url, $pattern);
         $retrun = array(
-          "dl" => "//www.fembed.com/f/".$pattern[0],
-          "iframe" => "//www.fembed.com/v/".$pattern[0],
+          "dl" => "//www.fembed.com/f/".$pattern[2],
+          "iframe" => "//www.fembed.com/v/".$pattern[2],
           "iframe_shinobi" => false,
-          "source_id" => $pattern[0]);
+          "source_id" => $pattern[2]);
         return $retrun;
         break;
       case (strpos($url, "nofile.io") == true):
@@ -192,6 +274,24 @@ class common {
           "iframe" => null,
           "iframe_shinobi" => false,
           "source_id" => $pattern[0]);
+        return $retrun;
+        break;
+      case (strpos($url, "gofile.io") == true):
+        preg_match('~(gofile\.io/\?c=)(.*)~',$url, $pattern);
+        $retrun = array(
+          "dl" => "//gofile.io/?c=".$pattern[2],
+          "iframe" => null,
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[2]);
+        return $retrun;
+        break;
+      case (strpos($url, "tknk.io") == true):
+        preg_match('~(tknk\.io/)(.*)~',$url, $pattern);
+        $retrun = array(
+          "dl" => "//tknk.io/".$pattern[2],
+          "iframe" => null,
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[2]);
         return $retrun;
         break;
       case (strpos($url, "ok.ru") == true):
