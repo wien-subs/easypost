@@ -113,8 +113,6 @@ include('header.php');
   jQuery(document).ready(function(){
     $(".dropdown-trigger").dropdown();
     $('.sidenav').sidenav();
-    $('.modal').modal({'dismissible': false});
-    $('.modal').modal('open'); 
     $('input.series').autocomplete({
       data: {
         "Tate no Yuusha no Narigari - Episodul ": null,

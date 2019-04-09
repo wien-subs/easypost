@@ -1,6 +1,5 @@
 <?php
-
-$sql = new mysqli("localhost", "root", "Florin12", "tla");
+$sql = new mysqli("localhost", "nexgfxro_easypost", "Florin12#", "nexgfxro_easypost");
 
 class db {
   public function register_eps($name, $data_ws, $data_sh) {
@@ -13,7 +12,7 @@ class db {
     if(strlen($name) < 3)
       $name = "Necunoscut";
     $sql->query("INSERT INTO `ep_logs` (`a_name`,`data_ws`,`data_sh`, `time`) VALUES ('$name', '$data_ws', '$data_sh', '$time')");
-    return ($this->count_rows() + 1);
+    return $this->count_rows();
   }
   private function count_rows() {
     global $sql;
