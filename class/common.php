@@ -114,6 +114,15 @@ class common {
           "source_id" => $pattern[2]);
         return $retrun;
         break;
+      case (strpos($url, "dai.ly") == true):
+        preg_match('~(dai\.ly/)(.*)~', $url, $pattern);
+        $retrun = array(
+          "dl" => null,
+          "iframe" => "//www.dailymotion.com/embed/video/".$pattern[2],
+          "iframe_shinobi" => true,
+          "source_id" => $pattern[2]);
+        return $retrun;
+        break;
       case (strpos($url, "drive.google.com") == true):
         preg_match('~(/d/)(([A-Za-z0-9_=+-]){24,})~', $url, $pattern);
         $retrun = array(
@@ -344,6 +353,15 @@ class common {
           "iframe" => null,
           "iframe_shinobi" => false,
           "source_id" => $pattern[0]);
+        return $retrun;
+        break;
+      case (strpos($url, "yadi.sk") == true):
+        preg_match('~(yadi\.sk/i/)(.*)~',$url, $pattern);
+        $retrun = array(
+          "dl" => "//yadi.sk/i/".$pattern[2],
+          "iframe" => null,
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[2]);
         return $retrun;
         break;
       default:
