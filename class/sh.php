@@ -59,7 +59,7 @@ class shinobi {
       case (strpos($url, "drive.google.com") == true):
           return '[SPOILER="GDrive"][MEDIA=googlevideo]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
         break;
-      case (strpos($url, "dailymotion.com") == true):
+      case (strpos($url, "dailymotion.com") == true or strpos($url, "dai.ly") == true):
           return '[SPOILER="DailyMotion"][MEDIA=dailymotion]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
         break;
       case (strpos($url, "stream.moe") == true):

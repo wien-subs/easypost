@@ -75,7 +75,7 @@ class wiensubs {
       case (strpos($url, "vidoza.net") == true):
           return "Vidz";
         break;
-      case (strpos($url, "dailymotion.com") == true):
+      case (strpos($url, "dailymotion.com") == true or strpos($url, "dai.ly") == true):
           return "Daily";
         break;
       case (strpos($url, "streamango.com") == true):
