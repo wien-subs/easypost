@@ -105,6 +105,24 @@ class common {
   
   public function get_url_id($url) {
     switch($url) {
+      case (strpos($url, "file555.com") == true):
+        preg_match('~(file555\.com/)(.*)/~', $url, $pattern);
+        $retrun = array(
+          "dl" => "//file555.com/".$pattern[2],
+          "iframe" => null,
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[2]);
+        return $retrun;
+        break;
+      case (strpos($url, "flix555.com") == true):
+        preg_match('~(flix555\.com/)(.*)~', $url, $pattern);
+        $retrun = array(
+          "dl" => null,
+          "iframe" => "//flix555.com/embed-".$pattern[2].".html",
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[2]);
+        return $retrun;
+        break;
       case (strpos($url, "dailymotion.com") == true):
         preg_match('~(/embed/video/|/video/)([[:alnum:]]{7,9})~', $url, $pattern);
         $retrun = array(
