@@ -105,6 +105,15 @@ class common {
   
   public function get_url_id($url) {
     switch($url) {
+      case (strpos($url, "ddl.to") == true):
+        preg_match('~((ddl\.to/d/)|(ddl\.to/))(.*)~', $url, $pattern);
+        $retrun = array(
+          "dl" => "//ddl.to/".$pattern[4],
+          "iframe" => null,
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[4]);
+        return $retrun;
+        break;
       case (strpos($url, "file555.com") == true):
         preg_match('~(file555\.com/)(.*)/~', $url, $pattern);
         $retrun = array(
@@ -401,6 +410,25 @@ class common {
       "time" => date("d.m.Y @ h:i:s", $data->time),
       "ws" => htmlentities(base64_decode($data->data_ws)),
       "sh" => htmlentities(base64_decode($data->data_sh))
+      );
+    }
+    else
+      return false;
+  }
+  
+  public function get_raw_logs($id = null) {
+    global $sql;
+    if(is_null($id))
+      $data = $sql->query("select * from `ep_logs` ORDER BY `id` DESC");
+    else
+      $data = $sql->query("select * from `ep_logs` where `id`='".$sql->real_escape_string($id)."'");
+    if($data->num_rows > 0) {
+      $data = $data->fetch_object();
+      return array(
+      "title" => $data->a_name,
+      "time" => date("d.m.Y @ h:i:s", $data->time),
+      "ws" => $data->data_ws,
+      "sh" => $data->data_sh
       );
     }
     else
