@@ -438,18 +438,18 @@ class common {
   public function get_raw_titles($limit = 5) {
     global $sql;
     if($limit == 5)
-      $data = $sql->query("select * from `ep_logs` ORDER BY `id` DESC limit = 5");
+      $data = $sql->query("select * from `ep_logs` ORDER BY `id` DESC limit 5");
     else
-      $data = $sql->query("select * from `ep_logs` ORDER BY `id` DESC limit = ".$limit);
+      $data = $sql->query("select * from `ep_logs` ORDER BY `id` DESC limit 5");
     if($data->num_rows > 0) {
       $count = 1;
       $keep = array();
-      while($data = $data->fetch_object()){
+      while($row = $data->fetch_object()){
         $dts = array(
-        "title".$count => $data->a_name,
-        "id".$count => $data->id
+        "title".$count => $row->a_name,
+        "id".$count => $row->id
         );
-        array_push($keep, $dts);
+        $keep = array_merge($keep, $dts);
         $count = $count + 1;
       }
       return $keep;
