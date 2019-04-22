@@ -1,12 +1,13 @@
 <?php
 require_once("function.php");
 header('Content-Type: application/json');
-$u_fansub = $sql->real_escape_string(@$_REQUIRE["whos"]);
-if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) == 'XMLHttpRequest' && isset($_SERVER['HTTP_X_REQUESTED_WITH']) == true) {
+$u_fansub = $sql->real_escape_string(@$_REQUEST["whos"]);
+// if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) == 'XMLHttpRequest' && isset($_SERVER['HTTP_X_REQUESTED_WITH']) == true) {
+if(true) {
   switch($u_fansub) {
     case "shinobi":
-      if($sql->real_escape_string(@$_REQUIRE["type"]) == "titles") {
-        $data = $common->get_raw_titles($_REQUIRE["limit"]);
+      if($sql->real_escape_string(@$_REQUEST["type"]) == "titles") {
+        $data = $common->get_raw_titles($_REQUEST["limit"]);
         echo json_encode(array(
           "title1" => base64_encode($data["title1"]),
           "id1" => base64_encode($data["id1"]),
@@ -19,8 +20,8 @@ if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) == 'XMLHttpRequest' && isset($_SERVE
           "title5" => base64_encode($data["title5"]),
           "id5" => base64_encode($data["id5"])));
       }
-      elseif($sql->real_escape_string(@$_REQUIRE["type"]) == "post_data") {
-        $data = $common->get_raw_logs($sql->real_escape_string(@$_REQUIRE["ids"]));
+      elseif($sql->real_escape_string(@$_REQUEST["type"]) == "post_data") {
+        $data = $common->get_raw_logs($sql->real_escape_string(@$_REQUEST["ids"]));
         echo json_encode(array(
           "title" => base64_encode($data["title"]),
           "post_data" => $data["sh"],
