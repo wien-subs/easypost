@@ -433,5 +433,28 @@ class common {
     }
     else
       return false;
+  }  
+  
+  public function get_raw_titles($limit = 5) {
+    global $sql;
+    if($limit == 5)
+      $data = $sql->query("select * from `ep_logs` ORDER BY `id` DESC limit = 5");
+    else
+      $data = $sql->query("select * from `ep_logs` ORDER BY `id` DESC limit = ".$limit);
+    if($data->num_rows > 0) {
+      $count = 1;
+      $keep = array();
+      while($data = $data->fetch_object()){
+        $dts = array(
+        "title".$count => $data->a_name,
+        "id".$count => $data->id
+        );
+        array_push($keep, $dts);
+        $count = $count + 1;
+      }
+      return $keep;
+    }
+    else
+      return false;
   }
 }
