@@ -1,0 +1,11 @@
+#wscopy {
+	border: 4px dashed #3f51b5;
+    border-radius: 2.5%;
+    padding: 10px;
+}
+
+#shcopy{
+    border: 5px double #673AB7;
+    border-radius: 2.5%;
+    padding: 10px;
+}

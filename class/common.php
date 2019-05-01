@@ -321,6 +321,15 @@ class common {
           "source_id" => $pattern[2]);
         return $retrun;
         break;
+      case (strpos($url, "solidfiles.com") == true):
+        preg_match('~(solidfiles\.com/(e|v)/)(.*)~',$url, $pattern);
+        $retrun = array(
+          "dl" => "//solidfiles.com/v/".$pattern[3],
+          "iframe" => "https://solidfiles.com/e/".$pattern[3],
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[3]);
+        return $retrun;
+        break;
       case (strpos($url, "tknk.io") == true):
         preg_match('~(tknk\.io/)(.*)~',$url, $pattern);
         $retrun = array(

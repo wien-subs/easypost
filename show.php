@@ -39,7 +39,7 @@ pre {
     <div class="container">
     <div class="row">
       <div class="col s12 center-align">
-        <h1><?php echo $data["title"];?></h1><br/><h3>(<?php echo $data["time"];?>)</h3>
+        <h2><?php echo $data["title"];?></h2><h5>(<?php echo $data["time"];?>)</h5>
       </div>
     </div>
       <div class="col s12">
