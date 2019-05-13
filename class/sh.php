@@ -24,7 +24,7 @@ class shinobi {
   Editare: ".$who["edit"]."[/I]".PHP_EOL;
   $middle_part = "
   Realizată în parteneriat cu Wien-Subs
-  [URL='https://www.wien-subs.ro/'][IMG]https://wien-subs.ro/asset/wsh.png[/IMG][/URL]
+  [URL='https://www.wien-subs.moe/'][IMG]https://wien-subs.moe/asset/wsh.png[/IMG][/URL]
 
   [B][I]Vizionare Plăcută![/I][/B]
   ".PHP_EOL;

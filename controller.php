@@ -141,7 +141,7 @@ Type........: '.$_POST["subtype"].'
 [videohd=http://www.youtube.com/watch?v='.$common->youtube_id_from_url($_POST["ytb"]).']
 [/center]
     ';
-      $id = $db->register_eps("FileList: "+$mal["name"], $keep,null);
+      $id = $db->register_eps("FileList: ".$mal["name"], $keep, null);
       sleep(5);
       header("Location: show.php?id=$id&meta=new");
     }
