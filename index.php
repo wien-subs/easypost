@@ -104,7 +104,7 @@ include('header.php');
   <div id="STOOOPPP" class="modal">
     <div class="modal-content">
       <h4>STOP - Scriptul a fost publicat și mutat!</h4>
-      <p><a href="https://easypost.wien-subs.ro">https://easypost.wien-subs.ro</a></p>
+      <p><a href="https://easypost.wien-subs.moe">https://easypost.wien-subs.moe</a></p>
     </div>
   </div>
     <script type="text/javascript" src="js/jquery-3.3.1.slim.min.js"></script>

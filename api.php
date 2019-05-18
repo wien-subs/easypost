@@ -2,8 +2,7 @@
 require_once("function.php");
 header('Content-Type: application/json');
 $u_fansub = $sql->real_escape_string(@$_REQUEST["whos"]);
-// if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) == 'XMLHttpRequest' && isset($_SERVER['HTTP_X_REQUESTED_WITH']) == true) {
-if(true) {
+if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) == 'XMLHttpRequest' && isset($_SERVER['HTTP_X_REQUESTED_WITH']) == true) {
   switch($u_fansub) {
     case "shinobi":
       if($sql->real_escape_string(@$_REQUEST["type"]) == "titles") {
@@ -61,4 +60,4 @@ if(true) {
   }
 }
 else
-  die();
+  die("Access its restricted to this resource, please use the key");
