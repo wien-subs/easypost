@@ -82,6 +82,7 @@ class common {
     ];
     return $data;
   }
+
   public function get_tags($name) {
     if(!strpos($name, "Necunoscut")) {
       preg_match('~^(.*) (-|–) (.*|[[:digit:]]{2,3})~m', $name, $pattern);
@@ -105,6 +106,15 @@ class common {
   
   public function get_url_id($url) {
     switch($url) {
+      case (strpos($url, "vup.to") == true):
+        preg_match('~(vup\.to/)(.*)(.html)~', $url, $pattern);
+        $retrun = array(
+          "dl" => null,
+          "iframe" => "//vup.to/emb.html?".$pattern[2],
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[2]);
+        return $retrun;
+        break;
       case (strpos($url, "ddl.to") == true):
         preg_match('~((ddl\.to/d/)|(ddl\.to/))(.*)~', $url, $pattern);
         $retrun = array(

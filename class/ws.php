@@ -137,8 +137,10 @@ class wiensubs {
         break;
       case (strpos($url, "ok.ru") == true):
           return "OK";
+      case (strpos($url, "vup.to") == true):
+          return "vUP";
       case (strpos($url, "s.go.ro") == true):
-          return "digi";
+          return "Pack";
         break;
       case (strpos($url, "girlshare.ro") == true):
           return "GS";
