@@ -6,6 +6,14 @@
 + ✓ Mediainfo Parser
 
 ##### Supported Links:
++ ✓ ulozto.net
++ ✓ vshare.eu
++ ✓ idtbox.com
++ ✓ uploadmp4.com
++ ✓ vidlox.me
++ ✓ onlystream.tv
++ ✓ uploadship.com
++ ✓ vup.to
 + ✓ ddl.to
 + ✓ file555.com
 + ✓ flix555.com
@@ -18,7 +26,7 @@
 + ✓ mp4upload.com
 + ✓ yourupload.com
 + ✓ fembed.com
-+ ✓ nofile.io
++ X ~~nofile.io~~
 + ✓ sendvid.com
 + ✓ mirrorace.com
 + ✓ mirrored.to

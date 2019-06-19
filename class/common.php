@@ -106,6 +106,69 @@ class common {
   
   public function get_url_id($url) {
     switch($url) {
+      case (strpos($url, "ulozto.net") == true):
+        preg_match('~(ulozto\.net/)(.*)(/.*)~', $url, $pattern);
+        $retrun = array(
+          "dl" => "//ulozto.net/".$pattern[2],
+          "iframe" => null,
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[2]);
+        return $retrun;
+        break;
+      case (strpos($url, "vshare.eu") == true):
+        preg_match('~(vshare\.eu)(.*)(\.html)~', $url, $pattern);
+        $retrun = array(
+          "dl" => "//vshare.eu/".$pattern[2]."htm",
+          "iframe" => "//vshare.eu/embed-".$pattern[2].".html",
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[2]);
+        return $retrun;
+        break;
+      case (strpos($url, "idtbox.com") == true):
+        preg_match('~(idtbox\.com/)(.*)~', $url, $pattern);
+        $retrun = array(
+          "dl" => "//idtbox.com/".$pattern[2],
+          "iframe" => "//idtbox.com/embed-".$pattern[2].".html",
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[2]);
+        return $retrun;
+        break;
+      case (strpos($url, "uploadmp4.com") == true):
+        preg_match('~(uploadmp4\.com/)(.*)~', $url, $pattern);
+        $retrun = array(
+          "dl" => "//uploadmp4.com/".$pattern[2],
+          "iframe" => "//uploadmp4.com/embed/".$pattern[2]."/",
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[2]);
+        return $retrun;
+        break;
+      case (strpos($url, "vidlox.me") == true):
+        preg_match('~(vidlox\.me/)(.*)~', $url, $pattern);
+        $retrun = array(
+          "dl" => "//vidlox.me/".$pattern[2],
+          "iframe" => "//vidlox.me/embed-".$pattern[2].".html",
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[2]);
+        return $retrun;
+        break;
+      case (strpos($url, "onlystream.tv") == true):
+        preg_match('~(onlystream\.tv/)(.*)~', $url, $pattern);
+        $retrun = array(
+          "dl" => "//onlystream.tv/".$pattern[2],
+          "iframe" => "//onlystream.tv/e/".$pattern[2],
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[2]);
+        return $retrun;
+        break;
+      case (strpos($url, "uploadship.com") == true):
+        preg_match('~(uploadship\.com/)(.*)~', $url, $pattern);
+        $retrun = array(
+          "dl" => "//www.uploadship.com/".$pattern[2],
+          "iframe" => "//www.uploadship.com/plugins/mediaplayer/site/_embed.php?u=".$pattern[2],
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[2]);
+        return $retrun;
+        break;
       case (strpos($url, "vup.to") == true):
         preg_match('~(vup\.to/)(.*)(.html)~', $url, $pattern);
         $retrun = array(
