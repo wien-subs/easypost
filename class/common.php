@@ -386,24 +386,6 @@ class common {
           "source_id" => $pattern[0]);
         return $retrun;
         break;
-      case (strpos($url, "stream.moe") == true):
-        preg_match('~[[:alnum:]]{16,18}~', $url, $pattern);
-        $retrun = array(
-          "dl" => "//stream.moe/".$pattern[0],
-          "iframe" => "//stream.moe/embed2/".$pattern[0],
-          "iframe_shinobi" => true,
-          "source_id" => $pattern[0]);
-        return $retrun;
-        break;
-      case (strpos($url, "openload.co") == true):
-        preg_match('~[[:alnum:]_+-]{9,12}~',$url, $pattern);
-        $retrun = array(
-          "dl" => "//openload.co/f/".$pattern[0],
-          "iframe" => "//openload.co/embed/".$pattern[0],
-          "iframe_shinobi" => true,
-          "source_id" => $pattern[0]);
-        return $retrun;
-        break;
       case (strpos($url, "streamango.com") == true):
         preg_match('~[[:alnum:]_+-]{15,18}~',$url, $pattern);
         $retrun = array(
