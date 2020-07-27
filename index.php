@@ -1,7 +1,6 @@
 <?php
 include('header.php');
 ?>
-
     <div class="container">
       <div class="col">
         <form action="controller.php" enctype="multipart/form-data" method="post">
@@ -58,7 +57,7 @@ include('header.php');
                 <span class="lever"></span>
                 On
               </label>
-              <label class="grey-text text-darken-4"> Serie realizată în parteneriat? </label>
+              <label class="white-text"> Serie realizată în parteneriat? </label>
             </div>
           </div>
           <div class="row">
@@ -69,17 +68,7 @@ include('header.php');
                 <span class="lever"></span>
                 On
               </label>
-              <label class="grey-text text-darken-4"> Variantă "BETA"/"Low Quality"? </label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="switch">
-              <label>
-                DVD/HDTV/WEBDL
-                <input type="checkbox" name="bluray" value="true">
-                <span class="lever"></span>
-                Bluray
-              </label>
+              <label class="white-text"> Variantă "BETA"/"Low Quality"? </label>
             </div>
           </div>
           <div class="row">
@@ -100,13 +89,6 @@ include('header.php');
         </form>
       </div>
     </div>
-  <!-- Modal Structure -->
-  <div id="STOOOPPP" class="modal">
-    <div class="modal-content">
-      <h4>STOP - Scriptul a fost publicat și mutat!</h4>
-      <p><a href="https://easypost.wien-subs.moe">https://easypost.wien-subs.moe</a></p>
-    </div>
-  </div>
     <script type="text/javascript" src="js/jquery-3.3.1.slim.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js" defer></script>
     <script defer>
@@ -116,19 +98,24 @@ include('header.php');
     $('input.series').autocomplete({
       data: {
         "Tate no Yuusha no Narigari - Episodul ": null,
-        "Endro - Episodul ": null,
         "Domestic na kanojo - Episodul ": null,
         "Dororo - Episodul ": null,
         "Revisions - Episodul ": null,
-        "Shingeki no Bahamut Manaria Friends - Episodul ": null,
         "Attack on Titans - Episodul ": null,
-        "One Punch Man - Episodul": null,
-        "Bungou Stray Dogs - Episodul": null,
         "Fairy Gone - Episodul": null,
         "Bokutachi wa Benkyou ga Dekinai - Episodul": null,
-        "Kenja no Mago - Episodul": null,
         "Fruits Basket - Episodul": null,
-        "Shoumetsu Toshi - Episodul": null,
+        "Enen no Shouboutai - Episodul ": null,
+        "Given - Episodul ": null,
+        "Tejina-senpai - Episodul ": null,
+        "Uchi no Ko no Tame Naraba - Episodul ": null,
+        "Katsute Kami Datta Kemono-tachi e - Episodul ": null,
+        "DanMachi II - Episodul ": null,
+        "Lord El-Melloi II Sei no Jikenbo - Episodul ": null,
+        "Arifureta Shokugyou de Sekai Saikyou - Episodul ": null,
+        "HenSuki - Episodul ": null,
+        "Dr.Stone - Episodul ": null,
+        "Vinland Saga - Episodul ": null,
         "Kono Yo no Hate de Koi wo Utau Shoujo YU-NO - Episodul": null
       },
     });

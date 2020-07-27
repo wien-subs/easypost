@@ -59,36 +59,38 @@ class common {
     $mal = new Jikan\Jikan;
     $malid = $this->sterilizeid($id);
     $malr = $mal->Anime($malid);
-    $malr = $malr->response;
     $gen = "";
     $studio = "";
-    foreach ($malr["studio"] as $gges)
-      $studio .= $gges["name"].", ";
-    foreach ($malr["genre"] as $gges)
-      $gen .= $gges["name"].", ";
+    foreach ($malr->getStudios() as $gges)
+      $studio .= $gges->getTitle(). ", ";
+    foreach ($malr->getGenres() as $gges)
+      $gen .= $gges->getTitle(). ", ";
     $data = [
-      "name" => $malr["title"],
-      "image" => $malr["image_url"],
+      "name" => $malr->getTitle(),
+      "image" => $malr->getImageUrl(),
       "gen" => $gen,
-      "alias" => $malr["title_english"]." ".$malr["title_synonyms"],
-      "aried" => $malr["aired_string"],
-      "dura" => $malr["duration"],
-      "rating" => $malr["rating"],
-      "desc" => $malr["synopsis"],
-      "url" => $malr["link_canonical"],
-      "eps" => $malr["episodes"],
+      "alias" => $malr->getTitleEnglish()." ".$malr->getTitleSynonyms(),
+      "aried" => $malr->getStatus(),
+      "dura" => $malr->getDuration(),
+      "rating" => $malr->getRating(),
+      "desc" => $malr->getSynopsis(),
+      "url" => $malr->getUrl(),
+      "eps" => $malr->getEpisodes(),
       "studio" => $studio,
-      "source" => $malr["source"],
+      "source" => $malr->getSource(),
     ];
     return $data;
   }
 
   public function get_tags($name) {
-    if(!strpos($name, "Necunoscut")) {
-      preg_match('~^(.*) (-|–) (.*|[[:digit:]]{2,3})~m', $name, $pattern);
-      preg_match('~[[:digit:]]{2,3}~m', $pattern[0], $nr_eps);
-      $data = $pattern[1].' rosub, '.$pattern[1].' subtitrat in romana, '.$pattern[1].' online romana, '.$pattern[1].' in romana, '.$pattern[1].' in romana download, '.$pattern[1].' download, '.$pattern[1].' descarcare, '.$pattern[1].' tradus in romana, '.$pattern[1].' tradus online, '.$pattern[1].' online in romana, Episodul '.$nr_eps[0].' din '.$pattern[1].' in romana, '.$pattern[1].' - '.$nr_eps[0].'  subtitrat, '.$pattern[1].' - '.$nr_eps[0].' rosubbed, '.$pattern[1].' rosubbed, '.$pattern[1].' - '.$nr_eps[0].' online in romana';
-      return $data;
+    if(strpos($name, "FileList") === false) {
+      if (!strpos($name, "Necunoscut")) {
+        preg_match('~^(.*) (-|–) (.*|[[:digit:]]{2,3})~m', $name, $pattern);
+        preg_match('~[[:digit:]]{2,3}~m', $pattern[0], $nr_eps);
+        $data = $pattern[1] . ' rosub, ' . $pattern[1] . ' subtitrat in romana, ' . $pattern[1] . ' online romana, ' . $pattern[1] . ' in romana, ' . $pattern[1] . ' in romana download, ' . $pattern[1] . ' download, ' . $pattern[1] . ' descarcare, ' . $pattern[1] . ' tradus in romana, ' . $pattern[1] . ' tradus online, ' . $pattern[1] . ' online in romana, Episodul ' . $nr_eps[0] . ' din ' . $pattern[1] . ' in romana, ' . $pattern[1] . ' - ' . $nr_eps[0] . '  subtitrat, ' . $pattern[1] . ' - ' . $nr_eps[0] . ' rosubbed, ' . $pattern[1] . ' rosubbed, ' . $pattern[1] . ' - ' . $nr_eps[0] . ' online in romana';
+        return $data;
+      } else
+        return false;
     }
     else
       return false;
@@ -106,6 +108,149 @@ class common {
   
   public function get_url_id($url) {
     switch($url) {
+      case (strpos($url, "streamz.cc") == true):
+        preg_match('~(streamz.cc)/(fd|id|)(.*)~m', $url, $pattern);
+        $retrun = array(
+          "dl" => "//streamz.cc/f".(substr($pattern[3], 0, 1) === "f" || substr($pattern[3], 0, 2) === "i" ? substr($pattern[3], 1) : $pattern[3]),
+          "iframe" => "//streamz.cc/i".(substr($pattern[3], 0, 1) === "f" || substr($pattern[3], 0, 2) === "i" ? substr($pattern[3], 1) : $pattern[3]),
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[3]);
+        return $retrun;
+        break;
+      case (strpos($url, "aparat.cam") == true):
+        preg_match('~(aparat\.cam)(/emb\.html\?|/)(.*)/~m', $url, $pattern);
+        $retrun = array(
+          "dl" => "//aparat.cam/".$pattern[3],
+          "iframe" => "//aparat.cam/emb.html?".$pattern[3],
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[3]);
+        return $retrun;
+        break;
+      case (strpos($url, "upstream.to") == true):
+        preg_match('~(upstream\.to)(/embed-|/)(.*)~m', $url, $pattern);
+        $retrun = array(
+          "dl" => "//upstream.to/".$pattern[3],
+          "iframe" => "//upstream.to/embed-".$pattern[3].".html",
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[3]);
+        return $retrun;
+        break;
+      case (strpos($url, "videobin.co") == true):
+        preg_match('~(videobin\.co)(/embed-|/)(.*)~m', $url, $pattern);
+        $retrun = array(
+          "dl" => "//videobin.co/".$pattern[3],
+          "iframe" => "//videobin.co/embed-".$pattern[3].".html",
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[3]);
+        return $retrun;
+        break;
+      case (strpos($url, "okstream.cc") == true):
+        preg_match('~(www\.|)(okstream\.cc)(/e/|/)(.*)(/|)~m', $url, $pattern);
+        $retrun = array(
+          "dl" => "//okstream.cc/".$pattern[4],
+          "iframe" => "//okstream.cc/e/".$pattern[4],
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[4]);
+        return $retrun;
+        break;
+      case (strpos($url, "streamwire.net") == true):
+        preg_match('~(streamwire\.net)(/e/|/)(.*)~m', $url, $pattern);
+        $retrun = array(
+          "dl" => "//streamwire.net/".$pattern[3],
+          "iframe" => "//streamwire.net/e/".$pattern[3],
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[3]);
+        return $retrun;
+        break;
+      case (strpos($url, "playtube.ws") == true):
+        preg_match('~(playtube\.ws/)(embed-|)(.*)\.html~m', $url, $pattern);
+        $retrun = array(
+          "dl" => "//playtube.ws/".$pattern[3],
+          "iframe" => "//playtube.ws/embed-".$pattern[3],
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[3]);
+        return $retrun;
+        break;
+      case (strpos($url, "oogly.io") == true):
+        preg_match('~(oogly\.io/)(embed-|)(.*)\.html~m', $url, $pattern);
+        $retrun = array(
+          "dl" => "//oogly.io/".$pattern[3].".html",
+          "iframe" => "//oogly.io/embed-".$pattern[3].".html",
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[3]);
+        return $retrun;
+        break;
+      case (strpos($url, "streamtape.com") == true):
+        preg_match('~(streamtape.com/)(e/|v/)(.*)/~m', $url, $pattern);
+        $retrun = array(
+          "dl" => "//streamtape.com/f/".$pattern[3],
+          "iframe" => "//streamtape.com/e/".$pattern[3],
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[3]);
+        return $retrun;
+        break;
+      case (strpos($url, "easyload.io") == true):
+        preg_match('~(easyload.io/)(e/|f/)(.*)/~m', $url, $pattern);
+        $retrun = array(
+          "dl" => "//easyload.io/f/".$pattern[3],
+          "iframe" => "//easyload.io/e/".$pattern[3],
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[3]);
+        return $retrun;
+        break;
+      case (strpos($url, "katfile.com") == true):
+        preg_match('~(katfile\.com/)(.*)/~m', $url, $pattern);
+        $retrun = array(
+          "dl" => "//katfile.com/".$pattern[2],
+          "iframe" => null,
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[2]);
+        return $retrun;
+        break;
+      case (strpos($url, "dood.watch") == true):
+        preg_match('~(dood\.watch/)(e|d)/(.*)~m', $url, $pattern);
+        $retrun = array(
+          "dl" => "//dood.watch/d/".$pattern[3],
+          "iframe" => "//dood.watch/e/".$pattern[3],
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[3]);
+        return $retrun;
+        break;
+      case (strpos($url, "playhydrax.com") == true):
+        preg_match('~((playhydrax)\.com)(/\?v=)([[:alnum:]]+)~', $url, $pattern);
+        $retrun = array(
+          "dl" => null,
+          "iframe" => "//playhydrax.com/?v=/".$pattern[4],
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[2]);
+        return $retrun;
+        break;
+      case (strpos($url, "mixdrop.co") == true):
+        preg_match('~(mixdrop\.co)/(f|e)/(.*)~', $url, $pattern);
+        $retrun = array(
+          "dl" => "//mixdrop.co/f/".$pattern[3],
+          "iframe" => "//mixdrop.co/e/".$pattern[3],
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[2]);
+        return $retrun;
+        break;
+        preg_match('~(saruch\.co)/(videos|embed)/(.{0,15})~', $url, $pattern);
+        $retrun = array(
+          "dl" => "//saruch.co/".$pattern[3],
+          "iframe" => "//saruch.co/embed/".$pattern[3],
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[2]);
+        return $retrun;
+        break;
+      case (strpos($url, "gounlimited.to") == true):
+        preg_match('~(gounlimited\.to/embed-|gounlimited\.to/)(.{0,12})(\.html|)~', $url, $pattern);
+        $retrun = array(
+          "dl" => "//gounlimited.to/".$pattern[2],
+          "iframe" => "//gounlimited.to/embed-".$pattern[2].".html",
+          "iframe_shinobi" => false,
+          "source_id" => $pattern[2]);
+        return $retrun;
+        break;
       case (strpos($url, "ulozto.net") == true):
         preg_match('~(ulozto\.net/)(.*)(/.*)~', $url, $pattern);
         $retrun = array(
@@ -287,7 +432,7 @@ class common {
         return $retrun;
         break;
       case (strpos($url, "fembed.com") == true):
-        preg_match('~(/v/|/f/)([[:alnum:]-+*]{10,13})~',$url, $pattern);
+        preg_match('~(/v/|/f/)(.*)~',$url, $pattern);
         $retrun = array(
           "dl" => "//www.fembed.com/f/".$pattern[2],
           "iframe" => "//www.fembed.com/v/".$pattern[2],
@@ -341,12 +486,12 @@ class common {
         return $retrun;
         break;
       case (strpos($url, "mega.nz") == true):
-        preg_match('~\S#([[:ascii:]]){10,53}~',$url, $pattern);
+        preg_match('~mega\.nz/(embed|file)/(.*)~m',$url, $pattern);
         $retrun = array(
-          "dl" => "//mega.nz/".str_replace('/','',$pattern[0]),
-          "iframe" => "//mega.nz/embed".str_replace('/','',$pattern[0]),
+          "dl" => "//mega.nz/file/".$pattern[2],
+          "iframe" => "//mega.nz/embed/".$pattern[2],
           "iframe_shinobi" => true,
-          "source_id" => str_replace('/','',$pattern[0]));
+          "source_id" => $pattern[2]);
         return $retrun;
         break;
       case (strpos(strtolower($url), "sendit.cloud") == true):
@@ -433,7 +578,7 @@ class common {
       case (strpos($url, "nyaa.si") == true):
         preg_match('~[[:digit:]]{6,7}~',$url, $pattern);
         $retrun = array(
-          "dl" => "//nyaa.si/veiw/".$pattern[0],
+          "dl" => "//nyaa.si/view/".$pattern[0],
           "iframe" => null,
           "iframe_shinobi" => false,
           "source_id" => $pattern[0]);
@@ -488,11 +633,11 @@ class common {
     $data = $sql->query("select * from `ep_logs` where `id`='".$sql->real_escape_string($id)."'");
     if($data->num_rows > 0) {
       $data = $data->fetch_object();
-      return array("title" => $data->a_name,
+      return ["title" => $data->a_name,
       "time" => date("d.m.Y @ h:i:s", $data->time),
       "ws" => htmlentities(base64_decode($data->data_ws)),
       "sh" => htmlentities(base64_decode($data->data_sh))
-      );
+      ];
     }
     else
       return false;
@@ -538,5 +683,20 @@ class common {
     }
     else
       return false;
+  }
+
+  public function search($data){
+    global $sql;
+    $data = $sql->real_escape_string($data);
+    $q = $sql->query("select * from `ep_logs` WHERE `a_name` LIKE '%$data%'");
+    if($q->num_rows > 0) {
+      $data = "";
+      while($row = $q->fetch_object()) {
+        $data .= "<tr><td><a href='show.php?id=".$row->id."'>".$row->id."</td><td>".$row->a_name."</td><td>".date("d.m.Y.", $row->time)."</td></tr>";
+      }
+      return $data;
+    }
+    else
+      return "<tr>NO</tr>";
   }
 }

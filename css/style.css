@@ -1,3 +1,25 @@
+input {
+	color: white;
+}
+textarea {
+	color: white;
+}
+.autocomplete-content li .highlight {
+	color: white;
+}
+.dropdown-content li:hover, .dropdown-content li.active {
+	background-color: #424242;
+}
+.autocomplete-content .dropdown-content {
+	background-color: #212121;
+	color: white;
+}
+.dropdown-content li {
+	background-color: #212121;
+	color: white;
+}
+
+
 #wscopy {
 	border: 4px dashed #3f51b5;
     border-radius: 2.5%;

@@ -60,9 +60,9 @@ class wiensubs {
   }
 
   private function gen_ws_ddl($link, $class){
-    $icons = array("mega", "ol", "moe", "drive", "mp4", "fl", "kb", "tuf", "gp", "nf", "thev", "filec", "nyaa", "adex", "sfs", "yuc", "nova", "vidoza", "sit", "fb", "ma", "mr", "yup");
+    $icons = array("mega", "mdc", "us", "gof", "ol", "moe", "drive", "mp4", "fl", "kb", "tuf", "gp", "nf", "thev", "filec", "nyaa", "adex", "sfs", "yuc", "nova", "vidoza", "sit", "fb", "ma", "mr", "yup");
     if(in_array($this->ws_get_tabt_class($class), $icons))
-      return '  <a href="'.$link.'" class="download '.$this->ws_get_tabt_class($class).'" target="_blank"> Download</a>'.PHP_EOL;
+      return '  <a href="'.$link.'" class="download '.strtolower($this->ws_get_tabt_class($class)).'" target="_blank"> Download</a>'.PHP_EOL;
     else
       return '  <a href="'.$link.'" class="download" target="_blank">'.$this->ws_get_tabt_class($class).'</a>'.PHP_EOL;
   }
@@ -72,6 +72,9 @@ class wiensubs {
       case (strpos($url, "drive.google.com") == true):
           return "drive";
         break;
+      case (strpos($url, "uploadship.com") == true):
+          return "us";
+        break;
       case (strpos($url, "vidoza.net") == true):
           return "Vidz";
         break;
@@ -80,6 +83,9 @@ class wiensubs {
         break;
       case (strpos($url, "streamango.com") == true):
           return "Sgo";
+        break;
+      case (strpos($url, "gofiles.io") == true):
+          return "GoF";
         break;
       case (strpos($url, "stream.moe") == true):
           return "moe";
@@ -127,7 +133,7 @@ class wiensubs {
           return "nyaa";
         break;
       case (strpos($url, "anime-torrents.ro") == true):
-          return "Anime-Torrents";
+          return "ATRO";
         break;
       case (strpos($url, "anidex.info") == true):
           return "adex";
@@ -135,18 +141,24 @@ class wiensubs {
       case (strpos($url, "go4up.com") == true):
           return "gp";
         break;
+      case (strpos($url, "mixdrop.co") == true):
+          return "mdc";
+        break;
       case (strpos($url, "ok.ru") == true):
           return "OK";
+          break;
       case (strpos($url, "vup.to") == true):
           return "vUP";
+          break;
       case (strpos($url, "s.go.ro") == true):
           return "Pack";
+          break;
         break;
       case (strpos($url, "girlshare.ro") == true):
           return "GS";
         break;
       default:
-        return "!DDL";
+        return "DDL";
         break;
     }
   }

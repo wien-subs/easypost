@@ -42,7 +42,7 @@ Who Release this?
                 <span>Shinobi & Wien-Subs</span>
               </label>
               <label>
-                <input type="radio" class="with-gap" name="releasetype" value="ws"/>
+                <input type="radio" class="with-gap" name="releasetype" value="ws" checked/>
                 <span>Wien-Subs</span>
               </label>
               <label>
@@ -60,6 +60,22 @@ Who Release this?
               <label>
                 <input type="radio" class="with-gap" name="subtype" value="SoftSub [Format SSA/ASS]"/>
                 <span>SoftSub</span>
+              </label>
+            </p>
+          </div>
+          <div class="row">
+            <p>
+              <label>
+                <input type="radio" class="with-gap" name="types" value="WEBRip" checked />
+                <span>WEBRip</span>
+              </label>
+              <label>
+                <input type="radio" class="with-gap" name="types" value="BluRay"/>
+                <span>BluRay</span>
+              </label>
+              <label>
+                <input type="radio" class="with-gap" name="types" value="DVD"/>
+                <span>DVD</span>
               </label>
             </p>
           </div>

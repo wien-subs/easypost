@@ -1,0 +1,4 @@
+<Files "api.php">
+  Header set Access-Control-Allow-Origin "*"
+  Header set Access-Control-Allow-Methods: "GET,POST"
+</Files>

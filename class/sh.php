@@ -57,31 +57,31 @@ class shinobi {
   private function get_sh_online($url, $iframe_id) {
     switch($url) {
       case (strpos($url, "drive.google.com") == true):
-          return '[SPOILER="GDrive"][MEDIA=googlevideo]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
+          return '[SPOILER="Vizionează Online GDrive"][MEDIA=googlevideo]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
         break;
       case (strpos($url, "dailymotion.com") == true or strpos($url, "dai.ly") == true):
-          return '[SPOILER="DailyMotion"][MEDIA=dailymotion]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
+          return '[SPOILER="Vizionează Online DailyMotion"][MEDIA=dailymotion]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
         break;
       case (strpos($url, "stream.moe") == true):
-          return '[SPOILER="Stream"][MEDIA=stream]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
+          return '[SPOILER="Vizionează Online Stream"][MEDIA=stream]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
         break;
       case (strpos($url, "openload.co") == true):
-          return '[SPOILER="OpenLoad"][MEDIA=openload]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
+          return '[SPOILER="Vizionează Online OpenLoad"][MEDIA=openload]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
         break;
       case (strpos($url, "mp4upload.com") == true):
-          return '[SPOILER="Mp4Up"][MEDIA=mp4upload]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
+          return '[SPOILER="Vizionează Online Mp4Up"][MEDIA=mp4upload]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
         break;
       case (strpos($url, "sendvid.com") == true):
-          return '[SPOILER="SendVid"][MEDIA=sendvid]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
+          return '[SPOILER="Vizionează Online SendVid"][MEDIA=sendvid]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
         break;
       case (strpos($url, "mega.nz") == true):
-          return '[SPOILER="MEGA"][MEDIA=mega]'.str_replace("#", "",$iframe_id).'[/MEDIA][/SPOILER]'.PHP_EOL;
+          return '[SPOILER="Vizionează Online MEGA"][MEDIA=mega]'.str_replace("#", "",$iframe_id).'[/MEDIA][/SPOILER]'.PHP_EOL;
         break;
       case (strpos($url, "sendit.cloud") == true):
-          return '[SPOILER="SendITcloud"][MEDIA=senditcloud]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
+          return '[SPOILER="Vizionează Online SendITcloud"][MEDIA=senditcloud]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
         break;
       case (strpos($url, "mirrorace.com") == true):
-          return '[SPOILER="MirrorAce"][MEDIA=mirrorace]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
+          return '[SPOILER="Vizionează Online MirrorAce"][MEDIA=mirrorace]'.$iframe_id.'[/MEDIA][/SPOILER]'.PHP_EOL;
         break;
       default:
         return "";

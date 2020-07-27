@@ -1,5 +1,6 @@
 {
-  "config": {
-    "vendor-dir": "class"
+  "require": {
+    "jikan-me/jikan": "^2.15",
+    "bhutanio/mediainfo-parser": "^1.0"
   }
 }

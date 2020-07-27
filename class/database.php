@@ -1,5 +1,5 @@
 <?php
-$sql = new mysqli("localhost", "", "", "");
+$sql = new mysqli("localhost", "wien_easypost", "zen42eLcANx9h9YM", "wien_easypost");
 
 class db {
   public function register_eps($name, $data_ws, $data_sh) {

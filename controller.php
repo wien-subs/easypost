@@ -141,13 +141,16 @@ Type........: '.$_POST["subtype"].'
 [videohd=http://www.youtube.com/watch?v='.$common->youtube_id_from_url($_POST["ytb"]).']
 [/center]
     ';
-      $id = $db->register_eps("FileList: ".$mal["name"], $keep, null);
-      sleep(5);
+      $id = $db->register_eps("FileList: ".$mal["name"], $keep, str_replace(" ", ".", $mal["name"]).".".$_POST["types"]);
+      sleep(1);
       header("Location: show.php?id=$id&meta=new");
     }
     catch (Exception $e) {
 
     }
+    break;
+  case "search":
+      die($common->search($_POST["aname"]));
     break;
   default:
     return 0;

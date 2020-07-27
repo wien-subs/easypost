@@ -1,6 +1,6 @@
 <?php
 header('X-XSS-Protection:0');
-error_reporting(E_ALL ^ E_NOTICE);
+//error_reporting(E_ALL ^ E_NOTICE);
 include('function.php');
 $id = $_REQUEST["id"];
 if(!empty($id) && is_numeric($id)){
@@ -18,15 +18,16 @@ else
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Wien-Subs - <?php echo $data["title"];?></title>
     <style>
 pre {
   overflow: hidden;
 }
   </style>
   </head>
-  <body>
+  <body class="grey darken-4 white-text">
     <div class="navbar-fixed">
-      <nav>
+      <nav class="blue-grey darken-4 white-text">
         <div class="nav-wrapper">
           <a href="index.php" class="brand-logo center">EasyPost</a>
           <ul id="nav-mobile" class="left hide-on-med-and-down">

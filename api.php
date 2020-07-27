@@ -1,8 +1,10 @@
 <?php
 require_once("function.php");
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET,POST");
 header('Content-Type: application/json');
 $u_fansub = $sql->real_escape_string(@$_REQUEST["whos"]);
-if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) == 'XMLHttpRequest' && isset($_SERVER['HTTP_X_REQUESTED_WITH']) == true) {
+if(true) {
   switch($u_fansub) {
     case "shinobi":
       if($sql->real_escape_string(@$_REQUEST["type"]) == "titles") {
