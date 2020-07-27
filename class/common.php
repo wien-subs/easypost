@@ -332,24 +332,6 @@ class common {
           "source_id" => $pattern[4]);
         return $retrun;
         break;
-      case (strpos($url, "file555.com") == true):
-        preg_match('~(file555\.com/)(.*)/~', $url, $pattern);
-        $retrun = array(
-          "dl" => "//file555.com/".$pattern[2],
-          "iframe" => null,
-          "iframe_shinobi" => false,
-          "source_id" => $pattern[2]);
-        return $retrun;
-        break;
-      case (strpos($url, "flix555.com") == true):
-        preg_match('~(flix555\.com/)(.*)~', $url, $pattern);
-        $retrun = array(
-          "dl" => null,
-          "iframe" => "//flix555.com/embed-".$pattern[2].".html",
-          "iframe_shinobi" => false,
-          "source_id" => $pattern[2]);
-        return $retrun;
-        break;
       case (strpos($url, "dailymotion.com") == true):
         preg_match('~(/embed/video/|/video/)([[:alnum:]]{7,9})~', $url, $pattern);
         $retrun = array(
@@ -386,15 +368,6 @@ class common {
           "source_id" => $pattern[0]);
         return $retrun;
         break;
-      case (strpos($url, "streamango.com") == true):
-        preg_match('~[[:alnum:]_+-]{15,18}~',$url, $pattern);
-        $retrun = array(
-          "dl" => "//streamango.com/f/".$pattern[0],
-          "iframe" => "//streamango.com/embed/".$pattern[0],
-          "iframe_shinobi" => false,
-          "source_id" => $pattern[0]);
-        return $retrun;
-        break;
       case (strpos($url, "mp4upload.com") == true):
         preg_match('~[[:alnum:]]{11,14}~',$url, $pattern);
         $retrun = array(
@@ -421,15 +394,6 @@ class common {
           "iframe_shinobi" => false,
           "source_id" => $pattern[2]);
         return $retrun;
-        break;
-      case (strpos($url, "nofile.io") == true):
-        preg_match('~[[:alnum:]]{10,13}~',$url, $pattern);
-        $retrun = array(
-          "dl" => "//nofile.io/f/".$pattern[0],
-          "iframe" => null,
-          "iframe_shinobi" => false,
-          "source_id" => $pattern[0]);
-          return $retrun;
         break;
       case (strpos($url, "sendvid.com") == true):
         preg_match('~[[:alnum:]]{8,10}~',$url, $pattern);
@@ -482,15 +446,6 @@ class common {
           "dl" => "//sendit.cloud/".$pattern[0],
           "iframe" => "//sendit.cloud/embed-".$pattern[0].".html",
           "iframe_shinobi" => true,
-          "source_id" => $pattern[0]);
-        return $retrun;
-        break;
-      case (strpos($url, "tusfiles.com") == true):
-        preg_match('~[[:alnum:]]{12,14}~',$url, $pattern);
-        $retrun = array(
-          "dl" => "//tusfiles.com/".$pattern[0],
-          "iframe" => "//tusfiles.com/embed-".$pattern[0].".html",
-          "iframe_shinobi" => false,
           "source_id" => $pattern[0]);
         return $retrun;
         break;
